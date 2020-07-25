@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>DeFi Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Simple DeFi Dashboard" name="description" /
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Bootstrap Css -->
+    <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    
+    <link href="assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js" integrity="sha512-/DXTXr6nQodMUiq+IUJYCt2PPOUjrHJ9wFrqpJ3XkgPNOZVfMok7cRw6CSxyCQxXn6ozlESsSh1/sMCTF1rL/g==" crossorigin="anonymous"></script>
+	<script src="assets/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
+	<script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+	
+	
+	<script src="https://cdn.jsdelivr.net/npm/web3@1.2.6/dist/web3.min.js"></script>
+	<script type="text/javascript">	
+		var web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/9fd26419086848afa2d9136effd73f9c"));
+	</script>
+	<script src="assets/js/metamask.js"></script>
+	<script src="assets/js/abi/cETH.js"></script>
+	<script src="assets/js/abi/cBAT.js"></script>
+	<script src="assets/js/abi/cDAI.js"></script>
+	<script src="assets/js/abi/cREP.js"></script>
+	<script src="assets/js/abi/cSAI.js"></script>
+	<script src="assets/js/abi/cUSDT.js"></script>
+	<script src="assets/js/abi/cUSDC.js"></script>
+	<script src="assets/js/abi/cWBTC.js"></script>
+	<script src="assets/js/abi/cZRX.js"></script>
+	<script src="assets/js/abi/erc20.js"></script>
+	<script src="assets/js/compound.js"></script>
+	
+	<script type="text/javascript">
+		var tokenomy_alert = function(){
+			Swal.fire(
+			  'Sedang dalam pengembangan',
+			  '',
+			  'info'
+			)
+		}
+	</script>
+</head>
+
+<body data-layout="horizontal">
+
+    <div class="container-fluid">
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            <header id="page-topbar">
+                <div class="navbar-header">
+                    <div class="d-flex">
+                        <!-- LOGO -->
+                        <div class="navbar-brand-box">
+                            <a href="index.html" class="logo logo-dark">
+                                <img src="assets/images/logo.png" alt="" height="30">
+                            </a>
+                        </div>
+
+                        <button type="button" class="btn btn-sm px-3 font-size-16 d-lg-none header-item waves-effect waves-light" data-toggle="collapse" data-target="#topnav-menu-content">
+                            <i class="fa fa-fw fa-bars"></i>
+                        </button>
+
+                        <div class="topnav">
+                            <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
+
+                                <div class="collapse navbar-collapse" id="topnav-menu-content">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item">
+                                            <a class="nav-link dropdown-toggle arrow-none" href="index.html" id="topnav-dashboard" role="button" >
+                                                Compound Finance 
+                                            </a>
+                                        </li>
+                                        <li class="nav-item d-none">
+                                            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-dashboard" role="button" onclick="tokenomy_alert(); return false;" >
+                                                Tokenomy
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+
+
+                        <div class="dropdown d-inline-block">
+                            <button class="btn btn-primary btn-lg" onclick="connectMetamask(); return false;" id="btn_connect_metamask">Sambung Metamask</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="page-title mb-0 font-size-18">Compound Finance</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item active">
+											<a href="#" onclick="refreshData(); return false;">
+												<span class="mdi mdi-reload refresh-btn"></span> reload
+											</a>
+                                        
+                                        </li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+						
+
+                        <div class="col-xl-12" id="coins_container">
+							
+							
+                            
+                            
+                            
+						</div>
+                    </div>
+                    <!-- end row -->
+                    
+                </div>
+                <!-- End Page-content -->
+
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <script>document.write(new Date().getFullYear())</script> © William Sutanto
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="text-sm-right d-none d-sm-block">
+                                    An Experimental Project
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+    </div>
+    <!-- end container-fluid -->
+    
+    
+    
+    <div class="d-none" id="template_coin_item">
+    
+		<div class="card">
+			<div class="card-body">
+				<div class="row align-items-center">
+					
+					
+					<div class="col-3">
+						<h4 class="mb-0">
+							<img src="" class="coin-logo" />&nbsp;
+							<span class="coin-name"></span>
+						</h4>
+					</div>
+					
+					<div class="col-2">
+						<p class="mb-0"><abbr title="Annual Percentage Yield">APY</abbr></p>
+						<h4 class="mb-0 coin_val_apy">
+							<span class="mdi mdi-loading mdi-spin"></span>
+						</h4>
+						<p class="mb-0">&nbsp;</p>
+					</div>
+					
+					<div class="col-5">
+						<div class="row">
+							<div class="col-6">
+								<p class="mb-0">Simpanan</p>
+								<h4 class="mb-0 coin_val_balance_underlying"><span class="mdi mdi-loading mdi-spin"></span></h4>
+								<p class="mb-0 coin_val_balance_underlying_idr">&nbsp;</p>
+							</div>
+							<div class="col-6">
+								<p class="mb-0">Pendapatan</p>
+								<h4 class="mb-0 coin_val_earned"><span class="mdi mdi-loading mdi-spin"></span></h4>
+								<p class="mb-0 coin_val_earned_idr">&nbsp;</p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-2 text-right">
+						<button class="btn btn-success btn-md mr-2 coin_btn_depo">Setor</button>
+						<button class="btn btn-danger btn-md coin_btn_wd">Tarik</button>
+					</div>
+					
+					
+				</div>
+			</div>
+		</div>
+    
+    </div>
+    
+    <div class="card mfp-hide mfp-popup-form mx-auto" id="depo-form" style="width: 600px;">
+		<div class="card-body">
+			<center><img src="" class="mb-2 coin_img" />
+			<h4 class="mt-0 mb-4">Setor <span class="val_coin_name"></span></h4></center>
+			<div class="row mb-4">
+				<div class="col-lg-12">
+					<div class="form-group">
+						<span class="float-right">Saldo: <a href="#" onclick="$('#depo_amount').val($(this).html()); return false;" class="val_coin_balance"></a></span>
+						<label for="name">Jumlah Setor</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="depo_amount" placeholder="">
+							<div class="input-group-append">
+								<span class="input-group-text val_coin_unit"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div>
+						<button class="btn btn-primary btn-block coin_btn_lanjut">Lanjut</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <div class="card mfp-hide mfp-popup-form mx-auto" id="enable-form" style="width: 600px;">
+		<div class="card-body">
+			<center><img src="" class="mb-2 coin_img" />
+			<h4 class="mt-0 mb-4">Setor <span class="val_coin_name"></span></h4></center>
+			<div class="row mb-4">
+				<div class="col-lg-12">
+					Untuk setor <span class="val_coin_name"></span> ke dalam protokol Compound, Anda harus memberi ijin kepada smart contract Compound terlebih dahulu menggunakan Metamask. 
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div>
+						<button class="btn btn-primary btn-block coin_btn_lanjut">Lanjut</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <div class="card mfp-hide mfp-popup-form mx-auto" id="wd-form" style="width: 600px;">
+		<div class="card-body">
+			<center><img src="" class="mb-2 coin_img" />
+			<h4 class="mt-0 mb-4">Tarik <span class="val_coin_name"></span></h4></center>
+			<div class="row mb-4">
+				<div class="col-lg-12">
+					<div class="form-group">
+						<span class="float-right">Saldo: <a href="#" onclick="$('#wd_amount').val($(this).html()); return false;" class="val_coin_balance"></a></span>
+						<label for="name">Jumlah Penarikan</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="wd_amount" placeholder="">
+							<div class="input-group-append">
+								<span class="input-group-text val_coin_unit"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div>
+						<button class="btn btn-primary btn-block coin_btn_lanjut">Lanjut</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
