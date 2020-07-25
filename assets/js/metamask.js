@@ -48,7 +48,7 @@ ethereum.on('accountsChanged', (accounts) => {
 
 ethereum.on('chainChanged', (chainId) => {
 	console.log('chainChanged', chainId);
-	if(chainId && chainId!='0x01'){
+	if(chainId && chainId!='0x1'){
 		Swal.fire(
 		  'Error',
 		  'Service ini hanya mendukung MainNet.',
