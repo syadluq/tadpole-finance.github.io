@@ -364,7 +364,12 @@ var pop_wd = function(id){
 	
 	data = compAccountValue[cont.id];
 	
-	$('#wd-form .val_coin_balance').html(parseFloat(data.supply_balance_underlying.value).toFixed(8));
+	if(!data){
+		$('#wd-form .val_coin_balance').html(0);
+	}
+	else{
+		$('#wd-form .val_coin_balance').html(parseFloat(data.supply_balance_underlying.value).toFixed(8));
+	}
 	
 	$.magnificPopup.open({
 		items: {
