@@ -228,7 +228,7 @@ var go_depo = async function(id){
 		if(cItem.id == id) cont = cItem;
 	});
 	var amount = $('#depo_amount').val();
-	if(!amount||isNaN(amount)){
+	if(!amount||isNaN(amount)||amount<=0){
 		Swal.fire(
 		  'Error',
 		  'Masukan angka yang valid.',
@@ -388,7 +388,7 @@ var go_wd = async function(id){
 		if(cItem.id == id) cont = cItem;
 	});
 	var amount = $('#wd_amount').val();
-	if(!amount||isNaN(amount)){
+	if(!amount||isNaN(amount)||amount<=0){
 		Swal.fire(
 		  'Error',
 		  'Masukan angka yang valid.',
