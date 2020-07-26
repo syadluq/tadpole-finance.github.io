@@ -174,7 +174,7 @@ var pop_depo = async function(id){
 	if(!account){
 		Swal.fire(
 		  'Error',
-		  'Silakan sambung browser denga Metamask sebelum melanjutkan.',
+		  'Silakan sambung browser denga MetaMask sebelum melanjutkan.',
 		  'error'
 		)
 		return;
@@ -239,7 +239,7 @@ var go_depo = async function(id){
 	
 	cToken =  new web3.eth.Contract(cont.abi, cont.address);
 	
-	$('#depo-form .coin_btn_lanjut').html('<span class="mdi mdi-loading mdi-spin"></span> Buka Metamask').attr('onclick', '');
+	$('#depo-form .coin_btn_lanjut').html('<span class="mdi mdi-loading mdi-spin"></span> Buka MetaMask').attr('onclick', '');
 	
 	if(cont.id=='eth'){
 	
@@ -311,7 +311,7 @@ var go_enable = async function(id){
 		if(cItem.id == id) cont = cItem;
 	});
 	
-	$('#enable-form .coin_btn_lanjut').html('<span class="mdi mdi-loading mdi-spin"></span> Buka Metamask').attr('onclick', '');
+	$('#enable-form .coin_btn_lanjut').html('<span class="mdi mdi-loading mdi-spin"></span> Buka MetaMask').attr('onclick', '');
 	
 	var token = new web3.eth.Contract(erc20Abi, cont.underlyingaddress);
 	var raw_amount = 999999999*Math.pow(10, cont.underlyingDecimals);
@@ -341,7 +341,7 @@ var pop_wd = function(id){
 	if(!account){
 		Swal.fire(
 		  'Error',
-		  'Silakan sambung browser denga Metamask sebelum melanjutkan.',
+		  'Silakan sambung browser denga MetaMask sebelum melanjutkan.',
 		  'error'
 		)
 		return;
@@ -397,7 +397,7 @@ var go_wd = async function(id){
 		return false;
 	}
 	
-	$('#wd-form .coin_btn_lanjut').html('<span class="mdi mdi-loading mdi-spin"></span> Buka Metamask').attr('onclick', '');
+	$('#wd-form .coin_btn_lanjut').html('<span class="mdi mdi-loading mdi-spin"></span> Buka MetaMask').attr('onclick', '');
 	
 	var raw_amount = Math.floor(amount * Math.pow(10, cont.underlyingDecimals))+"";
 	
