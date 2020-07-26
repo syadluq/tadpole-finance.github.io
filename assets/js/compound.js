@@ -164,7 +164,7 @@ var pop_depo = async function(id){
 	if(!account){
 		Swal.fire(
 		  'Error',
-		  'Silakan sambung browser denga MetaMask sebelum melanjutkan.',
+		  'Silakan sambung browser dengan MetaMask sebelum melanjutkan.',
 		  'error'
 		)
 		return;
@@ -331,7 +331,7 @@ var pop_wd = function(id){
 	if(!account){
 		Swal.fire(
 		  'Error',
-		  'Silakan sambung browser denga MetaMask sebelum melanjutkan.',
+		  'Silakan sambung browser dengan MetaMask sebelum melanjutkan.',
 		  'error'
 		)
 		return;
