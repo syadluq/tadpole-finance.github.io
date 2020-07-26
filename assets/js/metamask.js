@@ -4,7 +4,7 @@ var connectMetamask = async function(){
 	if (/Mobi|Android/i.test(navigator.userAgent)) {
 		Swal.fire(
 		  '',
-		  'Buka website ini dari aplikasi MetaMask dari HP Anda.<br /><br />Belum memiliki MetaMask? Silakan unduh di: <a href="https://metamask.io/download.html" target="_blank">https://metamask.io/download.html</a>.',
+		  'Buka website ini dari aplikasi MetaMask di HP.<br /><br />Belum memiliki MetaMask? Silakan unduh di: <a href="https://metamask.io/download.html" target="_blank">https://metamask.io/download.html</a>.',
 		  'info'
 		)
 		return;
