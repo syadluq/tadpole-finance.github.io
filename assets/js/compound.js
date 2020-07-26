@@ -92,12 +92,7 @@ var syncCompAccount = function(address){
 		$('.refresh-btn').removeClass('mdi-spin');
 	})
 	.catch(function(error) {
-		console.log(error);
-		Swal.fire(
-		  'Error',
-		  'Failed to connect to Compound.finance.',
-		  'error'
-		)
+		console.log('syncCompAccount', error);
 		
 		$('.refresh-btn').removeClass('mdi-spin');
 	});   
@@ -124,12 +119,7 @@ var getPrices = function(){
 		updatePrices();
 	})
 	.catch(function(error) {
-		console.log(error);
-		Swal.fire(
-		  'Error',
-		  'Failed to connect to Coingecko.',
-		  'error'
-		)
+		console.log('getPrices', error);
 	});   
 	
 }
