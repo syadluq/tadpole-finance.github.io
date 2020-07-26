@@ -16,6 +16,8 @@
     <!-- App Css-->
     <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     
+    <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    
     <link href="assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 	
@@ -68,10 +70,6 @@
                             </a>
                         </div>
 
-                        <button type="button" class="btn btn-sm px-3 font-size-16 d-lg-none header-item waves-effect waves-light" data-toggle="collapse" data-target="#topnav-menu-content">
-                            <i class="fa fa-fw fa-bars"></i>
-                        </button>
-
                         <div class="topnav">
                             <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
 
@@ -110,7 +108,7 @@
                 <div class="page-content">
 
                     <!-- start page title -->
-                    <div class="row">
+                    <div class="row row-upper">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
                                 <h4 class="page-title mb-0 font-size-18">Compound Finance</h4>
@@ -131,7 +129,7 @@
                     </div>
                     <!-- end page title -->
                     
-                    <div class="row">
+                    <div class="row row-upper">
                         <div class="col-12">
 							<div class="card bg-dark text-white">
                                 <div class="card-body">
@@ -155,7 +153,7 @@
                     <div class="row">
 						
 
-                        <div class="col-xl-12" id="coins_container">
+                        <div class="col-xl-12 mb-5" id="coins_container">
 							
 							
                             
@@ -200,29 +198,29 @@
 				<div class="row align-items-center">
 					
 					
-					<div class="col-3">
+					<div class="col-sm-3 col-xs-12 coin-title">
 						<h4 class="mb-0">
 							<img src="" class="coin-logo" />&nbsp;
 							<span class="coin-name"></span>
 						</h4>
 					</div>
 					
-					<div class="col-2">
-						<p class="mb-0"><abbr title="Annual Percentage Yield">APY</abbr></p>
-						<h4 class="mb-0 coin_val_apy">
-							<span class="mdi mdi-loading mdi-spin"></span>
-						</h4>
-						<p class="mb-0">&nbsp;</p>
-					</div>
+					<div class="col-sm-7 col-xs-12">
 					
-					<div class="col-5">
-						<div class="row">
-							<div class="col-6">
+						<div class="row coin-body">
+							<div class="col-4 coin-apy">
+								<p class="mb-0"><abbr title="Annual Percentage Yield">APY</abbr></p>
+								<h4 class="mb-0 coin_val_apy">
+									<span class="mdi mdi-loading mdi-spin"></span>
+								</h4>
+								<p class="mb-0 empty-space">&nbsp;</p>
+							</div>
+							<div class="col-4">
 								<p class="mb-0">Simpanan</p>
 								<h4 class="mb-0 coin_val_balance_underlying"><span class="mdi mdi-loading mdi-spin"></span></h4>
 								<p class="mb-0 coin_val_balance_underlying_idr">&nbsp;</p>
 							</div>
-							<div class="col-6">
+							<div class="col-4">
 								<p class="mb-0">Pendapatan</p>
 								<h4 class="mb-0 coin_val_earned"><span class="mdi mdi-loading mdi-spin"></span></h4>
 								<p class="mb-0 coin_val_earned_idr">&nbsp;</p>
@@ -230,9 +228,15 @@
 						</div>
 					</div>
 					
-					<div class="col-2 text-right">
-						<button class="btn btn-success btn-md mr-2 coin_btn_depo">Setor</button>
-						<button class="btn btn-danger btn-md coin_btn_wd">Tarik</button>
+					<div class="col-sm-2 col-xs-12 text-right">
+						<div class="row coin-buttons">
+							<div class="col-6 pl-0">
+								<button class="btn btn-success btn-md btn-block mr-2 coin_btn_depo">Setor</button>
+							</div>
+							<div class="col-6 pl-0">
+								<button class="btn btn-danger btn-md btn-block coin_btn_wd">Tarik</button>
+							</div>
+						</div>
 					</div>
 					
 					

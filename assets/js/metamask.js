@@ -28,8 +28,7 @@ var connectMetamask = async function(){
 	
 	web3 = new Web3(ethereum);
 	
-	
-	$('#btn_connect_metamask').html('Tersambung: '+account);
+	$('#btn_connect_metamask').html('Tersambung<span>: '+account+'</span>');
 	
 	getPrices();
 	syncCompAccount(account);
@@ -40,7 +39,7 @@ ethereum.on('accountsChanged', (accounts) => {
 	
 	web3 = new Web3(ethereum);
 	
-	$('#btn_connect_metamask').html('Tersambung: '+account);
+	$('#btn_connect_metamask').html('Tersambung<span>: '+account+'</span>');
 	
 	getPrices();
 	syncCompAccount(account);

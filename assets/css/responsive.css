@@ -1,0 +1,47 @@
+@media only screen and (max-width: 768px) {
+  #btn_connect_metamask span {
+	display: none;
+  }
+  
+  .container-fluid{
+	margin: 0 !important;
+	padding: 0 !important;
+  }
+  
+  .page-content{
+	padding: 0 !important;
+  }
+  
+  .row-upper{
+	padding-right: 20px;
+	padding-left: 20px;
+  }
+  
+  #coins_container .card{
+	margin-bottom: 1px !important;
+  }
+  
+  #coins_container{
+	margin-bottom: 65px !important;
+  }
+  
+  .coin-title{
+	margin-bottom: 10px !important;
+  }
+  
+  .coin-apy {
+	margin-bottom: 10px !important;
+  }
+  
+  .coin-apy .empty-space{
+	display: none;
+  }
+  
+  .coin-body{
+	margin-bottom: 10px !important;
+  }
+  
+  .coin-buttons .pl-0{
+	padding-left: 12px !important;
+  }
+}
