@@ -45,7 +45,6 @@
 </head>
 
 <body data-layout="horizontal">
-
     <div class="container-fluid">
         <!-- Begin page -->
         <div id="layout-wrapper">
@@ -131,6 +130,23 @@
                         </div>
                     </div>
                     <!-- end page title -->
+                    
+                    <div class="row mt-3 mb-3 d-none goerli-testnet">
+						<div class="col-12 text-center">
+							<div class="alert alert-warning text-center" role="alert">
+								You are currently connected to the Goerli Testnet
+							</div>
+						</div>
+					</div>
+                    
+                    <div class="row mt-3 mb-3 d-none mainnet">
+						<div class="col-12 text-center">
+							<div class="alert alert-danger text-center" role="alert">
+								Project is under development, currently only support the Goerli Testnet
+							</div>
+						</div>
+					</div>
+                    
                     <div class="row mt-5 mb-4">
 						<div class="col-xl-6 text-center">
 							<h6 class="text-success">Supply Balance</h6>
@@ -234,14 +250,14 @@
 								</h4>
 								<p class="mb-0 empty-space"></p>
 							</div>
-							<div class="col-6">
+							<div class="col-7">
 								<p class="mb-0">Supply Balance</p>
 								<h4 class="mb-0 coin_val_balance_underlying"><span class="mdi mdi-loading mdi-spin"></span></h4>
 								<p class="mb-0 coin_val_balance_underlying_usd"></p>
 							</div>
-							<div class="col-sm-3 col-xs-12 collateral-col">
+							<div class="col-sm-2 col-xs-12 collateral-col">
 							
-								<p class="mb-0"><abbr title="Use Supply as Collateral">Collateral</abbr></p>
+								<p class="mb-0"><abbr title="Enable Collateral and Borrowing">Enable</abbr></p>
 								<div class="custom-control custom-switch mb-2" dir="ltr">
 									<input type="checkbox" class="custom-control-input" id="">
 									<label class="custom-control-label" for=""></label>

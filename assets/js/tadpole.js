@@ -81,10 +81,15 @@ change_environment = function(chainId){
 	
 	if(chainId=='0x1'||chainId=='0x01'){ //mainnet
 		ENV = _MAINNET_ENV;
+		$('.goerli-testnet').addClass('d-none');
+		$('.mainnet').removeClass('d-none');
+		
+		alert('Project is under development, currently only support the Goerli Testnet');
 	}
 	else if(chainId=='0x5'||chainId=='0x05'){
 		ENV = _GOERLI_ENV;
-		
+		$('.mainnet').addClass('d-none');
+		$('.goerli-testnet').removeClass('d-none');
 	}
 	else{
 		Swal.fire(
@@ -98,8 +103,7 @@ change_environment = function(chainId){
 	syncCont();
 	
 	if(OLD_ENVID!=ENV.id){
-		displayCoinList();
-		refreshData();
+		setTimeout(refreshData, 50);
 	}
 	
 	return true;
@@ -286,10 +290,12 @@ var enableCollateral = async function(cTokenId){
 		if(cItem.id == id) cont = cItem;
 	});
 	
+	var cTokenId = cont.id;
 	await ENV.comptrollerContract.methods.entertMarkets([cont.address]).send({
 			from: account
 		}, function(err, result){
 		if (err) {
+			$('#'+cTokenId+'_is_collateral').prop( "checked", false );
 			Swal.fire(
 			  'Failed',
 			  err.message,
@@ -311,10 +317,12 @@ var disableCollateral = async function(id){
 		if(cItem.id == id) cont = cItem;
 	});
 	
+	var cTokenId = cont.id;
 	await ENV.comptrollerContract.methods.exitMarket(cont.address).send({
 			from: account
 		}, function(err, result){
 		if (err) {
+			$('#'+cTokenId+'_is_collateral').prop( "checked", true );
 			Swal.fire(
 			  'Failed',
 			  err.message,
@@ -325,7 +333,7 @@ var disableCollateral = async function(id){
 			  'Transaction Sent',
 			  result+' <a href="'+ENV.etherscan+'tx/'+result+'" target="_blank"><span class="mdi mdi-open-in-new"></span></a>',
 			  'success'
-			)
+			);
 		}
 	});
 }
@@ -660,6 +668,16 @@ var pop_borrow = function(id){
 		Swal.fire(
 		  'Error',
 		  'Connect to MetaMask to continue.',
+		  'error'
+		)
+		return;
+	}
+	
+	
+	if(!$('#'+id+'_is_collateral').is(':checked')){
+		Swal.fire(
+		  'Error',
+		  'You need to enable this market to start borrowing. Click the Enable switch in the supply section to enable markets.',
 		  'error'
 		)
 		return;
