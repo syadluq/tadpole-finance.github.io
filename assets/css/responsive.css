@@ -1,4 +1,4 @@
-#depo-form, #enable-form, #wd-form{
+#depo-form, #enable-form, #wd-form, #borrow-form, #repay-form{
 	max-width: 600px;
 	width: 90%;
 }

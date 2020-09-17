@@ -1,4 +1,18 @@
-var account
+
+var infura_key = '9fd26419086848afa2d9136effd73f9c';
+var infura_mainnet_url = 'https://mainnet.infura.io/v3/'+infura_key;
+var infura_goerli_url = 'https://goerli.infura.io/v3/'+infura_key;
+
+
+
+if(ethereum!== 'undefined'&& ethereum.chainId=='0x5'){
+	var web3 = new Web3(new Web3.providers.HttpProvider(infura_goerli_url));
+}
+else{
+	var web3 = new Web3(new Web3.providers.HttpProvider(infura_mainnet_url));
+}
+
+var account;
 
 var connectMetamask = async function(){
 	
@@ -28,43 +42,35 @@ var connectMetamask = async function(){
 	
 	const eth_chainId = await ethereum.request({ method: 'eth_chainId' });
 	
-	if(eth_chainId && eth_chainId!='0x01'){
-		console.log('eth_chainId', chainId);
-		Swal.fire(
-		  'Error',
-		  'Service ini hanya mendukung MainNet.',
-		  'error'
-		);
+	web3 = new Web3(ethereum);
+	
+	if(!change_environment(eth_chainId)){
+		console.log('eth_chainId', eth_chainId);
 		return;
 	}
 	
-	web3 = new Web3(ethereum);
+	$('#btn_connect_metamask').html('Connected<span>: '+account.substring(0, 6)+'..'+account.substring(account.length-4, account.length)+'</span>');
 	
-	$('#btn_connect_metamask').html('Tersambung<span>: '+account+'</span>');
-	
-	getPrices();
-	syncCompAccount(account);
 }
 
-ethereum.on('accountsChanged', (accounts) => {
+ethereum.on('accountsChanged', async (accounts) => {
 	account = accounts[0];
 	
 	web3 = new Web3(ethereum);
 	
-	$('#btn_connect_metamask').html('Tersambung<span>: '+account+'</span>');
+	$('#btn_connect_metamask').html('Connected<span>: '+account.substring(0, 6)+'..'+account.substring(account.length-4, account.length)+'</span>');
 	
-	getPrices();
-	syncCompAccount(account);
+	eth_chainId = await ethereum.request({ method: 'eth_chainId' });
+	change_environment(eth_chainId);
 });
 
-ethereum.on('chainChanged', (chainId) => {
-	console.log('chainChanged', chainId);
-	if(chainId && chainId!='0x1'){
-		Swal.fire(
-		  'Error',
-		  'Service ini hanya mendukung MainNet.',
-		  'error'
-		);
-		return;
+ethereum.on('chainChanged', async (chainId) => {
+	
+	change_environment(chainId);
+});
+
+$(function(){
+	if(ethereum!== 'undefined'){
+		connectMetamask();
 	}
 });
