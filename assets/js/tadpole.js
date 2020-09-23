@@ -290,6 +290,15 @@ var updateBorrowLimit = async function(borrowInUsd){
 
 var enableCollateral = async function(id){
 	
+	if(!account){
+		Swal.fire(
+		  'Error',
+		  'Connect to MetaMask to continue.',
+		  'error'
+		)
+		return;
+	}
+	
 	Object.values(ENV.cTokens).forEach(function(cItem, cIndex){
 		if(cItem.id == id) cont = cItem;
 	});
