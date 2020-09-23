@@ -23,6 +23,9 @@
 	<script src="assets/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
 	<script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
 	
+	<script src="assets/js/createjs-2015.11.26.min.js"></script>
+	<script src="assets/js/fish-animation.js"></script>
+	
 	
 	<script src="https://cdn.jsdelivr.net/npm/web3@1.2.6/dist/web3.min.js"></script>
 	<script src="assets/js/bignumber.min.js"></script>
@@ -41,10 +44,19 @@
 			  'info'
 			)
 		}
+		
+		$(function(){
+			var canvs = document.getElementById("fishHolder");
+			canvs.width = window.innerWidth;
+			canvs.height = window.innerHeight;
+			$('#fishHolder').fishAnimation();
+		});
 	</script>
 </head>
 
 <body data-layout="horizontal">
+	<canvas id="fishHolder" style="position:absolute;"></canvas>
+	
     <div class="container-fluid">
         <!-- Begin page -->
         <div id="layout-wrapper">
@@ -55,7 +67,7 @@
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
                             <a href="index.html" class="logo logo-dark">
-                                <img src="assets/images/tadpole.png" alt="" height="35px">
+                                <img src="assets/images/tadpole-logo-2.png" alt="" height="35px">
                             </a>
                         </div>
 
@@ -234,26 +246,30 @@
 					
 					
 					<div class="col-sm-3 col-xs-12 coin-title">
-						<h4 class="mb-0">
+						<h5 class="mb-0">
 							<img src="" class="coin-logo" />&nbsp;
 							<span class="coin-name"></span>
-						</h4>
+						</h5>
 					</div>
 					
 					<div class="col-sm-9 col-xs-12">
 					
 						<div class="row coin-body">
-							<div class="col-3 coin-apy">
+							<div class="col-2 coin-apy">
 								<p class="mb-0"><abbr title="Annual Percentage Yield">APY</abbr></p>
-								<h4 class="mb-0 coin_val_apy">
+								<h5 class="mb-0 coin_val_apy">
 									<span class="mdi mdi-loading mdi-spin"></span>
-								</h4>
+								</h5>
 								<p class="mb-0 empty-space"></p>
 							</div>
-							<div class="col-7">
+							<div class="col-6">
 								<p class="mb-0">Supply Balance</p>
-								<h4 class="mb-0 coin_val_balance_underlying"><span class="mdi mdi-loading mdi-spin"></span></h4>
+								<h5 class="mb-0 coin_val_balance_underlying"><span class="mdi mdi-loading mdi-spin"></span></h5>
 								<p class="mb-0 coin_val_balance_underlying_usd"></p>
+							</div>
+							<div class="col-sm-2 col-xs-12 collateral-percent-col">
+								<p class="mb-0"><abbr title="Collateral Percentage">Coll</abbr></p>
+								<h5 class="mb-0 coin_collateral_percentage"><span class="mdi mdi-loading mdi-spin"></span></h5>
 							</div>
 							<div class="col-sm-2 col-xs-12 collateral-col">
 							
@@ -282,10 +298,10 @@
 					
 					
 					<div class="col-sm-4 col-xs-12 coin-title">
-						<h4 class="mb-0">
+						<h5 class="mb-0">
 							<img src="" class="coin-logo" />&nbsp;
 							<span class="coin-name"></span>
-						</h4>
+						</h5>
 					</div>
 					
 					<div class="col-sm-8 col-xs-12">
@@ -293,14 +309,14 @@
 						<div class="row coin-body">
 							<div class="col-4 coin-apy">
 								<p class="mb-0">Borrow Rate</p>
-								<h4 class="mb-0 coin_val_rate">
+								<h5 class="mb-0 coin_val_rate">
 									<span class="mdi mdi-loading mdi-spin"></span>
-								</h4>
+								</h5>
 								<p class="mb-0 empty-space"></p>
 							</div>
 							<div class="col-8">
 								<p class="mb-0">Borrow Amount</p>
-								<h4 class="mb-0 coin_val_balance_borrow"><span class="mdi mdi-loading mdi-spin"></span></h4>
+								<h5 class="mb-0 coin_val_balance_borrow"><span class="mdi mdi-loading mdi-spin"></span></h5>
 								<p class="mb-0 coin_val_balance_borrow_usd"></p>
 							</div>
 						</div>

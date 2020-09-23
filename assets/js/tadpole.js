@@ -138,6 +138,10 @@ var syncRate = function(){
 		$(`.val_${cToken.id}_apy`).html(supplyApy.toFixed(2)+'%');
 		$(`.val_${cToken.id}_rate`).html(borrowApy.toFixed(2)+'%');
 		
+		var collateralFactorMantissa = await ENV.comptrollerContract.methods.getcollateralFactorMantissa(cToken.address).call();
+		var collateralFactor = collateralFactorMantissa / mentissa * 100;
+		
+		$(`.val_${cToken.id}_collateral_percentage`).html(collateralFactor.toFixed(0)+'%');
 		
 		
 	});
@@ -284,14 +288,14 @@ var updateBorrowLimit = async function(borrowInUsd){
 	$('.borrow-percentage').html(borrowPercentageString).css({width: borrowPercentageString}).attr('aria-valuenow', borrowPercentage).attr('aria-valuemin', borrowPercentage);
 }
 
-var enableCollateral = async function(cTokenId){
+var enableCollateral = async function(id){
 	
 	Object.values(ENV.cTokens).forEach(function(cItem, cIndex){
 		if(cItem.id == id) cont = cItem;
 	});
 	
 	var cTokenId = cont.id;
-	await ENV.comptrollerContract.methods.entertMarkets([cont.address]).send({
+	await ENV.comptrollerContract.methods.enterMarkets([cont.address]).send({
 			from: account
 		}, function(err, result){
 		if (err) {
@@ -352,6 +356,9 @@ var displayCoinList = function(){
 		$(html).addClass('supply-item').attr('token', item.id);
 		$(html).find('input[type="checkbox"]').attr('id', item.id+'_is_collateral');
 		$(html).find('.custom-control-label').attr('for', item.id+'_is_collateral');
+		$(html).find('.coin_collateral_percentage').addClass('val_'+item.id+'_collateral_percentage');
+		
+		
 		$(html).find('input[type="checkbox"]').click(function(e){
 			var isChecked = $(e.target).is(':checked');
 			if(isChecked) enableCollateral(item.id);
