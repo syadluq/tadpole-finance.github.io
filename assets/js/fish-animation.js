@@ -3,7 +3,7 @@
 		init_arr=[],
 		tickInit=false,
 		defaults={
-			fishImage:'assets/images/tadpole-sprite.png',
+			fishImage:'assets/images/tadpole-sprite-fix1.png',
 			fishFinImage:'assets/images/fin.png',
 			spritesheetSpeed:1,
 			colour:'#E5E5E5',
