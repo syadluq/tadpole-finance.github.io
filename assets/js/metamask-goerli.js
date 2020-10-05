@@ -45,6 +45,15 @@ var connectMetamask = async function(){
 	
 	const eth_chainId = await ethereum.request({ method: 'eth_chainId' });
 	
+	//force testnet
+	if(eth_chainId=='0x1'||eth_chainId=='0x01'){ //mainnet
+		Swal.fire(
+		  'Error',
+		  'Saving and Lending app is under development and currently only available in Goerli Testnet. Change your Metamask network to Goerli to use this app.',
+		  'error'
+		);
+		return;
+	}
 	
 	web3 = new Web3(ethereum);
 	
@@ -61,6 +70,16 @@ ethereum.on('accountsChanged', async (accounts) => {
 	
 	eth_chainId = await ethereum.request({ method: 'eth_chainId' });
 	
+	//force testnet
+	if(eth_chainId=='0x1'||eth_chainId=='0x01'){ //mainnet
+		Swal.fire(
+		  'Error',
+		  'Saving and Lending app is under development and currently only available in Goerli Testnet. Change your Metamask network to Goerli to use this app.',
+		  'error'
+		);
+		return;
+	}
+	
 	
 	account = accounts[0];
 	
@@ -72,6 +91,16 @@ ethereum.on('accountsChanged', async (accounts) => {
 });
 
 ethereum.on('chainChanged', async (chainId) => {
+	
+	//force testnet
+	if(chainChanged=='0x1'||chainChanged=='0x01'){ //mainnet
+		Swal.fire(
+		  'Error',
+		  'Saving and Lending app is under development and currently only available in Goerli Testnet. Change your Metamask network to Goerli to use this app.',
+		  'error'
+		);
+		return;
+	}
 	
 	change_environment(chainId);
 });
