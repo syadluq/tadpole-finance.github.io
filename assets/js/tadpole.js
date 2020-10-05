@@ -1134,7 +1134,7 @@ var go_unstake = async function(){
 	});
 }
 
-var go_claim = async function
+var go_claim = async function(){
 	
 	if(!account){
 		Swal.fire(
