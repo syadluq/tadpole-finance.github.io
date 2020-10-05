@@ -991,6 +991,15 @@ var init_genesis = async function(){
 
 var prepare_stake = async function(){
 	
+	if(!account){
+		Swal.fire(
+		  'Error',
+		  'Connect to MetaMask to continue.',
+		  'error'
+		)
+		return;
+	}
+	
 	var tadCont =  new web3.eth.Contract(erc20Abi, ENV.tadAddress);
 	var tenCont =  new web3.eth.Contract(erc20Abi, ENV.cTokens.ten.underlyingAddress);
 	var genesisCont =  new web3.eth.Contract(genesisMiningAbi, ENV.genesisMiningAddress);
@@ -1044,6 +1053,15 @@ var prepare_stake = async function(){
 
 var go_stake = async function(){
 	
+	if(!account){
+		Swal.fire(
+		  'Error',
+		  'Connect to MetaMask to continue.',
+		  'error'
+		)
+		return;
+	}
+	
 	var tadCont =  new web3.eth.Contract(erc20Abi, ENV.tadAddress);
 	var tenCont =  new web3.eth.Contract(erc20Abi, ENV.cTokens.ten.underlyingAddress);
 	var genesisCont =  new web3.eth.Contract(genesisMiningAbi, ENV.genesisMiningAddress);
@@ -1071,6 +1089,15 @@ var go_stake = async function(){
 }
 
 var go_unstake = async function(){
+	
+	if(!account){
+		Swal.fire(
+		  'Error',
+		  'Connect to MetaMask to continue.',
+		  'error'
+		)
+		return;
+	}
 	
 	var tadCont =  new web3.eth.Contract(erc20Abi, ENV.tadAddress);
 	var tenCont =  new web3.eth.Contract(erc20Abi, ENV.cTokens.ten.underlyingAddress);
