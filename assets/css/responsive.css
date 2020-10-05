@@ -13,10 +13,6 @@
 	padding: 0 !important;
   }
   
-  .page-content{
-	padding: 0 !important;
-  }
-  
   .row-upper{
 	padding-right: 20px;
 	padding-left: 20px;
@@ -48,5 +44,10 @@
   
   .coin-buttons .pl-0{
 	padding-left: 12px !important;
+  }
+  
+  
+  .page-content{
+	padding: 0 20px !important;
   }
 }

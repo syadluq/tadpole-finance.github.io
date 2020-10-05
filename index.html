@@ -9,18 +9,18 @@
     <!-- Primary Meta Tags -->
 	<title>Tadpole Finance</title>
 	<meta name="title" content="Tadpole Finance">
-	<meta name="description" content="Tadpole Finance is an improvement of Compound Finance">
+	<meta name="description" content="Decentralized Finance Platform for Saving and Lending Crypto">
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="Tadpole Finance">
-	<meta property="og:description" content="Tadpole Finance is an improvement of Compound Finance">
+	<meta property="og:description" content="Decentralized Finance Platform for Saving and Lending Crypto">
 	<meta property="og:image" content="assets/images/tadpoles-swimming.jpg">
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image">
 	<meta property="twitter:title" content="Tadpole Finance">
-	<meta property="twitter:description" content="Tadpole Finance is an improvement of Compound Finance">
+	<meta property="twitter:description" content="Decentralized Finance Platform for Saving and Lending Crypto">
 	<meta property="twitter:image" content="assets/images/tadpoles-swimming.jpg">
 
 
@@ -50,7 +50,7 @@
 	
 	<script src="https://cdn.jsdelivr.net/npm/web3@1.2.6/dist/web3.min.js"></script>
 	<script src="assets/js/bignumber.min.js"></script>
-	<script src="assets/js/metamask.js"></script>
+	<script src="assets/js/metamask-goerli.js"></script>
 	<script src="assets/js/abi/comptroller.js"></script>
 	<script src="assets/js/abi/oracle.js"></script>
 	<script src="assets/js/abi/cerc20.js"></script>
@@ -58,6 +58,7 @@
 	<script src="assets/js/tadpole.js"></script>
 	
 	<script type="text/javascript">
+		var page = 'main';
 		var development_alert = function(){
 			Swal.fire(
 			  'Under Development',
@@ -125,10 +126,10 @@
 						</div>
 					</div>
                     
-                    <div class="row mt-3 mb-3 d-none mainnet">
+                    <div class="row mt-3 mb-3 mainnet">
 						<div class="col-12 text-center">
 							<div class="alert alert-danger text-center" role="alert">
-								Project is under development, currently only support the Goerli Testnet
+								Saving and Lending app is under development and currently only available in Goerli Testnet
 							</div>
 						</div>
 					</div>
@@ -140,7 +141,7 @@
 						</div>
 						<div class="col-xl-6 text-center">
 							<h6 class="text-danger">Borrow Balance</h6>
-							<h3 class="text-dark borrow-balance"></h3>
+							<h3 class="text-dark borrow-balance">-</h3>
 						</div>
 					</div>
 					
@@ -227,7 +228,7 @@
 							<div class="col-6">
 								<p class="mb-0">Supply Balance</p>
 								<h5 class="mb-0 coin_val_balance_underlying"><span class="mdi mdi-loading mdi-spin"></span></h5>
-								<p class="mb-0 coin_val_balance_underlying_usd"></p>
+								<p class="mb-0 coin_val_balance_underlying_usd">$0.00</p>
 							</div>
 							<div class="col-sm-2 col-xs-12 collateral-percent-col">
 								<p class="mb-0"><abbr title="Collateral Percentage">Coll</abbr></p>
@@ -279,7 +280,7 @@
 							<div class="col-8">
 								<p class="mb-0">Borrow Amount</p>
 								<h5 class="mb-0 coin_val_balance_borrow"><span class="mdi mdi-loading mdi-spin"></span></h5>
-								<p class="mb-0 coin_val_balance_borrow_usd"></p>
+								<p class="mb-0 coin_val_balance_borrow_usd">$0.00</p>
 							</div>
 						</div>
 					</div>
