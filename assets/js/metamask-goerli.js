@@ -25,7 +25,7 @@ var connectMetamask = async function(){
 		if (/Mobi|Android/i.test(navigator.userAgent)) {
 			Swal.fire(
 			  '',
-			  'Open this website from MetaMask applicaiton.<br /><br />To get Metamask: <a href="https://metamask.io/download.html" target="_blank">https://metamask.io/download.html</a>.',
+			  'From your phone, open this website from MetaMask application.<br /><br />To get Metamask: <a href="https://metamask.io/download.html" target="_blank">https://metamask.io/download.html</a>.',
 			  'info'
 			)
 			return;
