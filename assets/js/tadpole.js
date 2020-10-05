@@ -309,7 +309,7 @@ var enableCollateral = async function(id){
 	if(!account){
 		Swal.fire(
 		  'Error',
-		  'Connect to MetaMask to continue.',
+		  'Connect MetaMask to continue.',
 		  'error'
 		)
 		return;
@@ -341,6 +341,15 @@ var enableCollateral = async function(id){
 }
 
 var disableCollateral = async function(id){
+	
+	if(!account){
+		Swal.fire(
+		  'Error',
+		  'Connect MetaMask to continue.',
+		  'error'
+		)
+		return;
+	}
 	
 	Object.values(ENV.cTokens).forEach(function(cItem, cIndex){
 		if(cItem.id == id) cont = cItem;
@@ -434,7 +443,7 @@ var pop_depo = async function(id){
 	if(!account){
 		Swal.fire(
 		  'Error',
-		  'Connect to MetaMask to continue.',
+		  'Connect MetaMask to continue.',
 		  'error'
 		)
 		return;
@@ -607,7 +616,7 @@ var pop_wd = function(id){
 	if(!account){
 		Swal.fire(
 		  'Error',
-		  'Connect to MetaMask to continue.',
+		  'Connect MetaMask to continue.',
 		  'error'
 		)
 		return;
@@ -699,7 +708,7 @@ var pop_borrow = function(id){
 	if(!account){
 		Swal.fire(
 		  'Error',
-		  'Connect to MetaMask to continue.',
+		  'Connect MetaMask to continue.',
 		  'error'
 		)
 		return;
@@ -801,7 +810,7 @@ var pop_repay = function(id){
 	if(!account){
 		Swal.fire(
 		  'Error',
-		  'Connect to MetaMask to continue.',
+		  'Connect MetaMask to continue.',
 		  'error'
 		)
 		return;
@@ -994,7 +1003,7 @@ var prepare_stake = async function(){
 	if(!account){
 		Swal.fire(
 		  'Error',
-		  'Connect to MetaMask to continue.',
+		  'Connect MetaMask to continue.',
 		  'error'
 		)
 		return;
@@ -1056,7 +1065,7 @@ var go_stake = async function(){
 	if(!account){
 		Swal.fire(
 		  'Error',
-		  'Connect to MetaMask to continue.',
+		  'Connect MetaMask to continue.',
 		  'error'
 		)
 		return;
@@ -1093,7 +1102,7 @@ var go_unstake = async function(){
 	if(!account){
 		Swal.fire(
 		  'Error',
-		  'Connect to MetaMask to continue.',
+		  'Connect MetaMask to continue.',
 		  'error'
 		)
 		return;
@@ -1125,7 +1134,16 @@ var go_unstake = async function(){
 	});
 }
 
-var go_claim = async function(){
+var go_claim = async function
+	
+	if(!account){
+		Swal.fire(
+		  'Error',
+		  'Connect MetaMask to continue.',
+		  'error'
+		)
+		return;
+	}
 	
 	var tadCont =  new web3.eth.Contract(erc20Abi, ENV.tadAddress);
 	var tenCont =  new web3.eth.Contract(erc20Abi, ENV.cTokens.ten.underlyingAddress);
