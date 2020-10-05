@@ -206,8 +206,11 @@ body[data-topbar="colored"] .navbar-header .waves-effect .waves-ripple {
       right: 10px !important; } }
 
 @media (max-width: 380px) {
+/*
   .navbar-brand-box {
-    display: none; } }
+    display: none; } 
+*/
+}
 
 .page-title-box .breadcrumb {
   background-color: transparent;

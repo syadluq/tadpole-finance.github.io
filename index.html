@@ -41,6 +41,7 @@
     <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js" integrity="sha512-/DXTXr6nQodMUiq+IUJYCt2PPOUjrHJ9wFrqpJ3XkgPNOZVfMok7cRw6CSxyCQxXn6ozlESsSh1/sMCTF1rL/g==" crossorigin="anonymous"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
 	<script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
 	
@@ -50,6 +51,7 @@
 	
 	<script src="https://cdn.jsdelivr.net/npm/web3@1.2.6/dist/web3.min.js"></script>
 	<script src="assets/js/bignumber.min.js"></script>
+	<script src="assets/libs/node-waves/waves.min.js"></script>
 	<script src="assets/js/metamask-goerli.js"></script>
 	<script src="assets/js/abi/comptroller.js"></script>
 	<script src="assets/js/abi/oracle.js"></script>
@@ -84,6 +86,7 @@
         <div id="layout-wrapper">
 
             <header id="page-topbar">
+				
             </header>
 
 
@@ -135,11 +138,11 @@
 					</div>
                     
                     <div class="row mt-5 mb-4">
-						<div class="col-xl-6 text-center">
+						<div class="col-6 text-center">
 							<h6 class="text-success">Supply Balance</h6>
 							<h3 class="text-dark supply-balance">-</h3>
 						</div>
-						<div class="col-xl-6 text-center">
+						<div class="col-6 text-center">
 							<h6 class="text-danger">Borrow Balance</h6>
 							<h3 class="text-dark borrow-balance">-</h3>
 						</div>
@@ -208,33 +211,43 @@
 				<div class="row align-items-center">
 					
 					
-					<div class="col-sm-3 col-xs-12 coin-title">
+					<div class="col-sm-3 col-7 coin-title">
 						<h5 class="mb-0">
 							<img src="" class="coin-logo" />&nbsp;
 							<span class="coin-name"></span>
 						</h5>
 					</div>
+					<div class="col-3 d-sm-none text-right pr-0 pb-3 align-top">
+						<abbr title="Enable Collateral and Borrowing">Enable</abbr>
+					</div>
+					<div class="col-2 d-sm-none collateral-col pb-2">
+						<div class="custom-control custom-switch mb-2">
+							 
+							<label class="custom-control-label" for=""></label>
+							<input type="checkbox" class="custom-control-input" id="">
+						</div>
+					</div>
 					
 					<div class="col-sm-9 col-xs-12">
 					
 						<div class="row coin-body">
-							<div class="col-2 coin-apy">
+							<div class="col-sm-2 col-3 coin-apy">
 								<p class="mb-0"><abbr title="Annual Percentage Yield">APY</abbr></p>
 								<h5 class="mb-0 coin_val_apy">
 									<span class="mdi mdi-loading mdi-spin"></span>
 								</h5>
 								<p class="mb-0 empty-space"></p>
 							</div>
-							<div class="col-6">
+							<div class="col-sm-6 col-6 ">
 								<p class="mb-0">Supply Balance</p>
 								<h5 class="mb-0 coin_val_balance_underlying"><span class="mdi mdi-loading mdi-spin"></span></h5>
 								<p class="mb-0 coin_val_balance_underlying_usd">$0.00</p>
 							</div>
-							<div class="col-sm-2 col-xs-12 collateral-percent-col">
+							<div class="col-sm-2 col-3 collateral-percent-col">
 								<p class="mb-0"><abbr title="Collateral Percentage">Coll</abbr></p>
 								<h5 class="mb-0 coin_collateral_percentage"><span class="mdi mdi-loading mdi-spin"></span></h5>
 							</div>
-							<div class="col-sm-2 col-xs-12 collateral-col">
+							<div class="col-2 d-none d-sm-block collateral-col">
 							
 								<p class="mb-0"><abbr title="Enable Collateral and Borrowing">Enable</abbr></p>
 								<div class="custom-control custom-switch mb-2" dir="ltr">
