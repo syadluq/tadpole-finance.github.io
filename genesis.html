@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    
+    
+    
+    <!-- Primary Meta Tags -->
+	<title>Tadpole Finance</title>
+	<meta name="title" content="Tadpole Finance - Genesis Mining">
+	<meta name="description" content="Join Genesis Mining Program to get the distribution of 200,000 TAD (20% of supply)">
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Tadpole Finance - Genesis Mining">
+	<meta property="og:description" content="Join Genesis Mining Program to get the distribution of 200,000 TAD (20% of supply)">
+	<meta property="og:image" content="assets/images/tadpoles-swimming.jpg">
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:title" content="Tadpole Finance - Genesis Mining">
+	<meta property="twitter:description" content="Join Genesis Mining Program to get the distribution of 200,000 TAD (20% of supply)">
+	<meta property="twitter:image" content="assets/images/tadpoles-swimming.jpg">
+
+
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap Css -->
+    <link href="assets/css/bootstrap.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="assets/css/tadpole.css" id="app-style" rel="stylesheet" type="text/css" />
+    
+    <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    
+    <link href="assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js" integrity="sha512-/DXTXr6nQodMUiq+IUJYCt2PPOUjrHJ9wFrqpJ3XkgPNOZVfMok7cRw6CSxyCQxXn6ozlESsSh1/sMCTF1rL/g==" crossorigin="anonymous"></script>
+	<script src="assets/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
+	<script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+	
+	<script src="assets/js/createjs-2015.11.26.min.js"></script>
+	<script src="assets/js/fish-animation.js?3"></script>
+	
+	
+	<script src="https://cdn.jsdelivr.net/npm/web3@1.2.6/dist/web3.min.js"></script>
+	<script src="assets/js/bignumber.min.js"></script>
+	<script src="assets/js/metamask.js"></script>
+	<script src="assets/js/abi/GenesisMining.js"></script>
+	<script src="assets/js/abi/erc20.js"></script>
+	<script src="assets/js/tadpole.js"></script>
+	
+	<script type="text/javascript">
+		var page = 'genesis';
+		var development_alert = function(){
+			Swal.fire(
+			  'Under Development',
+			  '',
+			  'info'
+			)
+		}
+		
+		$(function(){
+			var canvs = document.getElementById("fishHolder");
+			canvs.width = window.innerWidth;
+			canvs.height = window.innerHeight;
+			$('#fishHolder').fishAnimation();
+		});
+	</script>
+</head>
+
+<body data-layout="horizontal">
+	<canvas id="fishHolder" style="position:absolute;"></canvas>
+	
+    <div class="container-fluid">
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            <header id="page-topbar">
+            </header>
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+
+                    <!-- start page title -->
+                    <div class="row row-upper">
+                        <div class="col-12">
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    
+                    <div class="row mt-3 mb-3 d-none goerli-testnet">
+						<div class="col-12 text-center">
+							<div class="alert alert-warning text-center" role="alert">
+								You are currently connected to the Goerli Testnet
+							</div>
+						</div>
+					</div>
+                    
+                    <div class="row mt-5 mb-4 justify-content-center">
+						<div class="col-lg-3 col-md-4 col-6 text-center">
+							<h6 class="text-dark">Total Stake</h6>
+							<h3 class="text-dark total-stake">-</h3>
+						</div>
+						<div class="col-lg-3 col-md-4 col-6 text-center">
+							<h6 class="text-dark">Your Stake</h6>
+							<h3 class="text-dark my-stake">-</h3>
+						</div>
+						<div class="col-lg-3 col-md-4 col-6 text-center">
+							<h6 class="text-dark">Available to Claim</h6>
+							<h3 class="text-dark tad-to-claim">-</h3>
+						</div>
+					</div>
+					
+					<div class="row mb-5">
+						<div class="col-3 col-md-2 text-right">
+							Genesis Progress
+						</div>
+						<div class="col-6 col-md-8 text-center pt-1">
+							<div class="progress">
+								<div class="progress-bar genesis-percentage" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+							</div>
+                         </div>
+						<div class="col-3 col-md-2 text-left">
+							172800 blocks
+						</div>
+					</div>
+                    
+                    <div class="row coins_container">
+						
+
+                        <div class="col-xl-4 mb-5">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Stake</h4>
+									<p class="card-title-desc">
+										Stake TEN to get the initial distribution of TAD. Total 200.000 TAD will be distributed in 30 days.
+									</p>
+									
+									<form>
+									
+										<div class="form-group">
+											<span class="float-right">Available: <a href="#" onclick="$('#stake_amount').val($(this).html()); return false;" class="val_ten_balance">0</a> TEN</span>
+											<label for="name">Amount to Stake</label>
+											<div class="input-group mb-3">
+												<input type="text" class="form-control" id="stake_amount" placeholder="">
+												<div class="input-group-append">
+													<span class="input-group-text">TEN</span>
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div>
+													<button type="submit" class="btn btn-success waves-effect waves-light mr-1" onclick="prepare_stake(); return false;">
+														Stake
+													</button>
+												</div>
+											</div>
+										</div>
+										
+										
+									</form>
+								</div>
+							</div>
+                            
+                            
+                            
+						</div>
+						
+
+                        <div class="col-xl-4 mb-5">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Unstake</h4>
+									<p class="card-title-desc">
+										You may unstake your TEN token anytime during and after the Genesis Mining period.
+									</p>
+									
+									<form>
+										
+										<div class="form-group">
+											<span class="float-right">Your Stake: <a href="#" onclick="$('#unstake_amount').val($(this).html()); return false;" class="val_ten_stake">0</a> TEN</span>
+											<label for="name">Amount to Unstake</label>
+											<div class="input-group mb-3">
+												<input type="text" class="form-control" id="unstake_amount" placeholder="">
+												<div class="input-group-append">
+													<span class="input-group-text">TEN</span>
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div>
+													<button type="submit" class="btn btn-danger waves-effect waves-light mr-1" onclick="go_unstake(); return false;">
+														Unstake
+													</button>
+												</div>
+											</div>
+										</div>
+										
+										
+									</form>
+								</div>
+							</div>
+                            
+                            
+                            
+						</div>
+						
+
+                        <div class="col-xl-4 mb-5">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Claim</h4>
+									<p class="card-title-desc">
+										You need to manually claim to get TAD token into your wallet. Beware that you need to spend some ethereum gas.
+									</p>
+									
+									<form>
+										
+										<div class="form-group">
+											<span class="float-right">Available: ~<span class="tad-to-claim">0</span> TAD</span>
+											<label for="name">Amount to Claim</label>
+											<div class="input-group mb-3">
+												<input type="text" class="form-control" id="val_tad_avail" placeholder="" disabled="disabled" value="0">
+												<div class="input-group-append">
+													<span class="input-group-text">TAD</span>
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div>
+													<button type="submit" class="btn btn-info waves-effect waves-light mr-1" onclick="go_claim(); return false;">
+														Claim
+													</button>
+												</div>
+											</div>
+										</div>
+										
+										
+									</form>
+								</div>
+							</div>
+                            
+                            
+                            
+						</div>
+                    </div>
+                    <!-- end row -->
+                    
+                </div>
+                <!-- End Page-content -->
+
+                <footer class="footer">
+                </footer>
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+    </div>
+    <!-- end container-fluid -->
+    
+    
+    
+    <script type="text/javascript" src="./assets/js/pages.js"></script>
+
+</body>
+</html>

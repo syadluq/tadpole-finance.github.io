@@ -1,3 +1,6 @@
+var BN = web3.utils.BN;
+
+
 
 var accountBalance = new Object();
 var accountBorrow = new Object();
@@ -14,6 +17,8 @@ var _MAINNET_ENV = {
 	"id": 1,
 	"comptrollerAddress": "0x505E1c2BFfe0Bf14b9f5521e4F4233FF977a2395",
 	"oracleAddress": "0x0f03a46E1c3393B5ef90BB6c297197274c71e7Bc",
+	"tadAddress": "0xDB4b0387Ca9b9eB2bf6654887adbE6125a2Fd19C",
+	"genesisMiningAddress": "0xC5dB56078aB1857A0D42A9D70C8a9282d4dB858b",
 	"etherscan": "https://etherscan.io/",
 	"cTokens": {
 		"idk": {
@@ -45,6 +50,8 @@ var _GOERLI_ENV = {
 	"id": 5,
 	"comptrollerAddress": "0x505E1c2BFfe0Bf14b9f5521e4F4233FF977a2395",
 	"oracleAddress": "0x0f03a46E1c3393B5ef90BB6c297197274c71e7Bc",
+	"tadAddress": "0xDB4b0387Ca9b9eB2bf6654887adbE6125a2Fd19C",
+	"genesisMiningAddress": "0xC5dB56078aB1857A0D42A9D70C8a9282d4dB858b",
 	"etherscan": "https://goerli.etherscan.io/",
 	"cTokens": {
 		"idk": {
@@ -100,7 +107,8 @@ change_environment = function(chainId){
 		return false;
 	}
 	
-	syncCont();
+	if(page=='main') syncCont();
+	else if(page=='genesis') init_genesis();
 	
 	if(OLD_ENVID!=ENV.id){
 		setTimeout(refreshData, 50);
@@ -110,6 +118,9 @@ change_environment = function(chainId){
 }
 
 var syncCont = function(){
+	
+	if(page!='main') return;
+	
 	ENV.comptrollerContract = new web3.eth.Contract(comptrollerAbi, ENV.comptrollerAddress);
 	ENV.oracleContract = new web3.eth.Contract(oracleAbi, ENV.oracleAddress);
 	Object.values(ENV.cTokens).forEach(async function(cToken, index){
@@ -128,6 +139,9 @@ async function asyncForEach(array, callback) {
 }
 
 var syncRate = function(){
+	
+	if(page!='main') return;
+	
 	Object.values(ENV.cTokens).forEach(async function(cToken, index){
 	
 		var supplyRatePerBlock = await cToken.contract.methods.supplyRatePerBlock().call();
@@ -170,6 +184,8 @@ var getBalance = async function(cToken, address){
 }
 
 var syncAccount = async function(address){
+	
+	if(page!='main') return;
 			
 	if(!address){
 		Object.values(ENV.cTokens).forEach(function(cToken, cIndex){
@@ -926,12 +942,227 @@ function numberToString(num)
     return numStr;
 }
 
-$(function(){
-	syncCont();
-	displayCoinList();
-	refreshData();
-});
 
-setInterval(function(){
-	refreshData();
-}, 60000);
+/* genesis */
+
+var getClaimableTad = async function(address){
+	var genesisCont =  new web3.eth.Contract(genesisMiningAbi, ENV.genesisMiningAddress);
+	var stakerIndex = await genesisCont.methods.stakerIndexes(address).call();
+	var tenStake = await genesisCont.methods.stakeHolders(address).call();
+	var currentBlock = await web3.eth.getBlockNumber();
+	var miningState = await genesisCont.methods.getMiningState(currentBlock).call();
+	
+	var deltaIndex = (new BN(miningState[0])).sub(new BN(stakerIndex));
+	var tadDelta = web3.utils.fromWei((new BN (deltaIndex)).mul(new BN(tenStake)));
+	
+	return tadDelta;
+	
+}
+
+var init_genesis = async function(){
+	var tadCont =  new web3.eth.Contract(erc20Abi, ENV.tadAddress);
+	var tenCont =  new web3.eth.Contract(erc20Abi, ENV.cTokens.ten.underlyingAddress);
+	var genesisCont =  new web3.eth.Contract(genesisMiningAbi, ENV.genesisMiningAddress);
+	
+	var total_stake = await genesisCont.methods.totalStaked().call();
+	var miningStateBlock = await genesisCont.methods.miningStateBlock().call();
+	var startMiningBlockNum = await genesisCont.methods.startMiningBlockNum().call();
+	var totalGenesisBlockNum = 172800;
+	var genesisProgressPercent = ((miningStateBlock-startMiningBlockNum)/totalGenesisBlockNum*100).toFixed(2);
+	
+	$('.total-stake').html(web3.utils.fromWei(total_stake));
+	
+	var genesisPercentageString = genesisProgressPercent+"%";
+	$('.genesis-percentage').html(genesisPercentageString).css({width: genesisPercentageString}).attr('aria-valuenow', genesisProgressPercent).attr('aria-valuemin', genesisProgressPercent);
+	
+	if(account){
+		var tenBalance = await tenCont.methods.balanceOf(account).call();
+		var tenStake = await genesisCont.methods.stakeHolders(account).call();
+		var claimableTad = await getClaimableTad(account);
+	
+		$('.val_ten_balance').html(toMaxDecimal(web3.utils.fromWei(tenBalance)));
+		$('.my-stake, .val_ten_stake').html(web3.utils.fromWei(tenStake));
+		$('.tad-to-claim').html(toMaxDecimal(web3.utils.fromWei(claimableTad)));
+		$('#val_tad_avail').val(toMaxDecimal(web3.utils.fromWei(claimableTad)));
+	}
+	
+	
+}
+
+var prepare_stake = async function(){
+	
+	var tadCont =  new web3.eth.Contract(erc20Abi, ENV.tadAddress);
+	var tenCont =  new web3.eth.Contract(erc20Abi, ENV.cTokens.ten.underlyingAddress);
+	var genesisCont =  new web3.eth.Contract(genesisMiningAbi, ENV.genesisMiningAddress);
+	
+	var stake_amount = $('#stake_amount').val();
+	var stake_raw_amount = web3.utils.toWei(stake_amount);
+	
+	var ten_balance = await tenCont.methods.balanceOf(account).call();
+	
+	if(!stake_amount){
+		Swal.fire(
+		  'Failed',
+		  'Invalid staking amount',
+		  'error'
+		);
+		return;
+	}
+	
+	if(stake_raw_amount>ten_balance){
+		Swal.fire(
+		  'Failed',
+		  'TEN balance not enough',
+		  'error'
+		);
+		return;
+	}
+	
+	var allowance = await tenCont.methods.allowance(account, ENV.genesisMiningAddress).call();
+	
+	
+	if(allowance<stake_raw_amount){ //allowance not enough, ask to approve
+		var uintmax = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
+		await tenCont.methods.approve(ENV.genesisMiningAddress, uintmax).send({from: account}, function(err, result){
+			if (err) {
+				$.magnificPopup.close();
+				Swal.fire(
+				  'Failed',
+				  err.message,
+				  'error'
+				)
+			} else {
+				go_stake();
+			}
+		});
+	}
+	
+	else{
+		go_stake();
+	}
+}
+
+var go_stake = async function(){
+	
+	var tadCont =  new web3.eth.Contract(erc20Abi, ENV.tadAddress);
+	var tenCont =  new web3.eth.Contract(erc20Abi, ENV.cTokens.ten.underlyingAddress);
+	var genesisCont =  new web3.eth.Contract(genesisMiningAbi, ENV.genesisMiningAddress);
+	
+	var stake_amount = $('#stake_amount').val();
+	var stake_raw_amount = web3.utils.toWei(stake_amount);
+	
+	await genesisCont.methods.stake(stake_raw_amount).send({from: account}, function(err, result){
+		if (err) {
+			$.magnificPopup.close();
+			Swal.fire(
+			  'Failed',
+			  err.message,
+			  'error'
+			)
+		} else {
+			$.magnificPopup.close();
+			Swal.fire(
+			  'Transaction Sent',
+			  result+' <a href="'+ENV.etherscan+'tx/'+result+'" target="_blank"><span class="mdi mdi-open-in-new"></span></a>',
+			  'success'
+			);
+		}
+	});
+}
+
+var go_unstake = async function(){
+	
+	var tadCont =  new web3.eth.Contract(erc20Abi, ENV.tadAddress);
+	var tenCont =  new web3.eth.Contract(erc20Abi, ENV.cTokens.ten.underlyingAddress);
+	var genesisCont =  new web3.eth.Contract(genesisMiningAbi, ENV.genesisMiningAddress);
+	
+	var unstake_amount = $('#unstake_amount').val();
+	var unstake_raw_amount = web3.utils.toWei(unstake_amount);
+	
+	await genesisCont.methods.unstake(unstake_raw_amount).send({from: account}, function(err, result){
+		if (err) {
+			$.magnificPopup.close();
+			Swal.fire(
+			  'Failed',
+			  err.message,
+			  'error'
+			)
+		} else {
+			$.magnificPopup.close();
+			Swal.fire(
+			  'Transaction Sent',
+			  result+' <a href="'+ENV.etherscan+'tx/'+result+'" target="_blank"><span class="mdi mdi-open-in-new"></span></a>',
+			  'success'
+			);
+		}
+	});
+}
+
+var go_claim = async function(){
+	
+	var tadCont =  new web3.eth.Contract(erc20Abi, ENV.tadAddress);
+	var tenCont =  new web3.eth.Contract(erc20Abi, ENV.cTokens.ten.underlyingAddress);
+	var genesisCont =  new web3.eth.Contract(genesisMiningAbi, ENV.genesisMiningAddress);
+	
+	await genesisCont.methods.claimTad().send({from: account}, function(err, result){
+		if (err) {
+			$.magnificPopup.close();
+			Swal.fire(
+			  'Failed',
+			  err.message,
+			  'error'
+			)
+		} else {
+			$.magnificPopup.close();
+			Swal.fire(
+			  'Transaction Sent',
+			  result+' <a href="'+ENV.etherscan+'tx/'+result+'" target="_blank"><span class="mdi mdi-open-in-new"></span></a>',
+			  'success'
+			);
+		}
+	});
+}
+
+
+
+
+var toMaxDecimal = function(num, max=8){
+	if(typeof num=='float') num = num.toString();
+	
+	if(!num) return '0';
+	
+	var tmp = num.split('.');
+	
+	if(!tmp[1]){
+		return tmp[0];
+	}
+	
+	var decNow = tmp[1].length;
+	
+	if(decNow>max){
+		num = tmp[0]+'.'+tmp[1].substring(0, 8);
+	}
+	return num;
+}
+
+
+
+
+$(function(){
+	if(page=='main'){
+
+		syncCont();
+		displayCoinList();
+		refreshData();
+
+		setInterval(function(){
+			refreshData();
+		}, 60000);
+		
+	}
+	else if(page=='genesis'){
+		$(function(){
+			init_genesis();
+		});
+	}
+});
