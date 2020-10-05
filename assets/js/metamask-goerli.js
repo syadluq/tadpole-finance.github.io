@@ -25,7 +25,7 @@ var connectMetamask = async function(){
 		if (/Mobi|Android/i.test(navigator.userAgent)) {
 			Swal.fire(
 			  '',
-			  'Buka website ini dari aplikasi MetaMask di HP.<br /><br />Belum memiliki MetaMask? Silakan unduh di: <a href="https://metamask.io/download.html" target="_blank">https://metamask.io/download.html</a>.',
+			  'Open this website from MetaMask applicaiton.<br /><br />To get Metamask: <a href="https://metamask.io/download.html" target="_blank">https://metamask.io/download.html</a>.',
 			  'info'
 			)
 			return;
@@ -33,7 +33,7 @@ var connectMetamask = async function(){
 		
 		Swal.fire(
 		  'Error',
-		  'Untuk menggunakan website ini Anda perlu memiliki MetaMask pada browser Anda.<br /><br />Silakan unduh MetaMask di: <a href="https://metamask.io/download.html" target="_blank">https://metamask.io/download.html</a>.',
+		  'You need a MetaMask plugin in your browser.<br /><br />To get Metamask: <a href="https://metamask.io/download.html" target="_blank">https://metamask.io/download.html</a>.',
 		  'error'
 		)
 		return;
