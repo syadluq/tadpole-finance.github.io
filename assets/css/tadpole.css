@@ -2786,3 +2786,7 @@ input[switch="dark"]:checked + label {
 input[type="text"].form-control:disabled{
 	background-color: #F2F2F2;
 }
+
+.custom-control-label{
+	cursor: pointer;
+}

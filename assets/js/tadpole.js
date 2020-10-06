@@ -5,6 +5,7 @@ var BN = web3.utils.BN;
 var accountBalance = new Object();
 var accountBorrow = new Object();
 var prices = new Object();	
+var enableCollateral = new Object();	
 var assetsIn;
 var accountLiquidityAvailable;
 
@@ -221,11 +222,13 @@ var syncAccount = async function(address){
 		
 		if($.inArray(cToken.address, assetsIn) >= 0){
 			//collateral is enabled
-			$('#'+cToken.id+'_is_collateral').prop( "checked", true );
+			enableCollateral[cToken.id] = true;
+			$('.'+cToken.id+'_is_collateral').prop( "checked", true );
 		}
 		else{
 			//collateral is disabled
-			$('#'+cToken.id+'_is_collateral').prop( "checked", false );
+			enableCollateral[cToken.id] = false;
+			$('.'+cToken.id+'_is_collateral').prop( "checked", false );
 		}
 		
 		i++;
@@ -324,7 +327,7 @@ var enableCollateral = async function(id){
 			from: account
 		}, function(err, result){
 		if (err) {
-			$('#'+cTokenId+'_is_collateral').prop( "checked", false );
+			$('.'+cTokenId+'_is_collateral').prop( "checked", false );
 			Swal.fire(
 			  'Failed',
 			  err.message,
@@ -360,7 +363,7 @@ var disableCollateral = async function(id){
 			from: account
 		}, function(err, result){
 		if (err) {
-			$('#'+cTokenId+'_is_collateral').prop( "checked", true );
+			$('.'+cTokenId+'_is_collateral').prop( "checked", true );
 			Swal.fire(
 			  'Failed',
 			  err.message,
@@ -388,15 +391,21 @@ var displayCoinList = function(){
 		$(html).find('.coin_val_balance_underlying').addClass('val_'+item.id+'_balance_underlying');
 		$(html).find('.coin_val_balance_underlying_usd').addClass('val_'+item.id+'_balance_underlying_usd');
 		$(html).addClass('supply-item').attr('token', item.id);
-		$(html).find('input[type="checkbox"]').attr('id', item.id+'_is_collateral');
-		$(html).find('.custom-control-label').attr('for', item.id+'_is_collateral');
+		$(html).find('input[type="checkbox"]').addClass(item.id+'_is_collateral');
+		
+		$(html).find('input[type="checkbox"]').last().attr('id', item.id+'_is_collateral');
+		$(html).find('.custom-control-label').last().attr('for', item.id+'_is_collateral');
+		
+		$(html).find('input[type="checkbox"]').first().attr('id', item.id+'_is_collateral_2');
+		$(html).find('.custom-control-label').first().attr('for', item.id+'_is_collateral_2');
+		
 		$(html).find('.coin_collateral_percentage').addClass('val_'+item.id+'_collateral_percentage');
 		
 		
 		$(html).find('input[type="checkbox"]').click(function(e){
-			var isChecked = $(e.target).is(':checked');
-			if(isChecked) enableCollateral(item.id);
-			else disableCollateral(item.id);
+			let isEnabled =  enableCollateral[item.id];
+			if(isEnabled) disableCollateral(item.id);
+			else enableCollateral(item.id);
 		});
 		
 		
@@ -715,7 +724,7 @@ var pop_borrow = function(id){
 	}
 	
 	
-	if(!$('#'+id+'_is_collateral').is(':checked')){
+	if(!enableCollateral[id]){
 		Swal.fire(
 		  'Error',
 		  'You need to enable this market to start borrowing. Click the Enable switch in the supply section to enable markets.',
@@ -1206,8 +1215,10 @@ $(function(){
 		
 	}
 	else if(page=='genesis'){
-		$(function(){
+		init_genesis();
+
+		setInterval(function(){
 			init_genesis();
-		});
+		}, 60000);
 	}
 });
