@@ -13,3 +13,20 @@ fetch("./footer.html")
   .then(data => {
     document.querySelector("footer").innerHTML = data;
   });
+  
+
+var development_alert = function(){
+	Swal.fire(
+	  'Coming soon!',
+	  '',
+	  'info'
+	)
+}
+
+
+$(function(){
+	var canvs = document.getElementById("fishHolder");
+	canvs.width = window.innerWidth;
+	canvs.height = window.innerHeight;
+	$('#fishHolder').fishAnimation();
+});
