@@ -787,7 +787,7 @@ var go_borrow = async function(id){
 		return false;
 	}
 	
-	$('#wd-form .coin_btn_lanjut').html('<span class="mdi mdi-loading mdi-spin"></span> Open MetaMask').attr('onclick', '');
+	$('#borrow-form .coin_btn_lanjut').html('<span class="mdi mdi-loading mdi-spin"></span> Open MetaMask').attr('onclick', '');
 	
 	var raw_amount = Math.floor(amount * Math.pow(10, cont.underlyingDecimals));
 	
@@ -1049,8 +1049,12 @@ var prepare_stake = async function(){
 	
 	
 	if(allowance<stake_raw_amount){ //allowance not enough, ask to approve
+		
+	
+		$('.go-stake').append(' <span class="mdi mdi-loading mdi-spin"></span>').attr('onclick', '');
 		var uintmax = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
 		await tenCont.methods.approve(ENV.genesisMiningAddress, uintmax).send({from: account}, function(err, result){
+			$('.go-stake .mdi-loading').remove();
 			if (err) {
 				$.magnificPopup.close();
 				Swal.fire(
@@ -1087,7 +1091,9 @@ var go_stake = async function(){
 	var stake_amount = $('#stake_amount').val();
 	var stake_raw_amount = web3.utils.toWei(stake_amount);
 	
+	$('.go-stake').append(' <span class="mdi mdi-loading mdi-spin"></span>').attr('onclick', '');
 	await genesisCont.methods.stake(stake_raw_amount).send({from: account}, function(err, result){
+		$('.go-stake .mdi-loading').remove();
 		if (err) {
 			$.magnificPopup.close();
 			Swal.fire(
@@ -1124,7 +1130,9 @@ var go_unstake = async function(){
 	var unstake_amount = $('#unstake_amount').val();
 	var unstake_raw_amount = web3.utils.toWei(unstake_amount);
 	
+	$('.go-unstake').append(' <span class="mdi mdi-loading mdi-spin"></span>').attr('onclick', '');
 	await genesisCont.methods.unstake(unstake_raw_amount).send({from: account}, function(err, result){
+		$('.go-unstake .mdi-loading').remove();
 		if (err) {
 			$.magnificPopup.close();
 			Swal.fire(
@@ -1158,7 +1166,9 @@ var go_claim = async function(){
 	var tenCont =  new web3.eth.Contract(erc20Abi, ENV.cTokens.ten.underlyingAddress);
 	var genesisCont =  new web3.eth.Contract(genesisMiningAbi, ENV.genesisMiningAddress);
 	
+	$('.go-claim').append(' <span class="mdi mdi-loading mdi-spin"></span>').attr('onclick', '');
 	await genesisCont.methods.claimTad().send({from: account}, function(err, result){
+		$('.go-claim .mdi-loading').remove();
 		if (err) {
 			$.magnificPopup.close();
 			Swal.fire(
