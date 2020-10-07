@@ -43,6 +43,39 @@ var _MAINNET_ENV = {
 			"underlyingDecimals": 18,
 			"address": "0x8e82Fe91Ebc61842ABB6c5cfe324e04f5E396335",
 			"underlyingAddress": "0x56C0369E002852C2570ca0CC3442E26df98E01A2"
+		},
+		"usdt": {
+			"id": "usdt",
+			"name": "USDT",
+			"index": "tether",
+			"unit": "USDT",
+			"logo": "./assets/libs/cryptocurrency-icons/32/color/usdt.png",
+			"cTokenDecimals": 8,
+			"underlyingDecimals": 6,
+			"address": "0x49FE03B293B8f8806A1f98c8A8535778eFb1A247",
+			"underlyingAddress": "0x1Ad746307FC56B1eB8627FA2C088Ae320CF13224"
+		},
+		"wbtc": {
+			"id": "wbtc",
+			"name": "WBTC",
+			"index": "wbtc",
+			"unit": "WBTC",
+			"logo": "./assets/images/tokens/wbtc_32.png",
+			"cTokenDecimals": 8,
+			"underlyingDecimals": 8,
+			"address": "0x651F15B02115CCB9f11686600075489C83D36c00",
+			"underlyingAddress": "0xdA4a47eDf8ab3c5EeeB537A97c5B66eA42F49CdA"
+		},
+		"weth": {
+			"id": "weth",
+			"name": "WETH",
+			"index": "weth",
+			"unit": "WETH",
+			"logo": "./assets/images/tokens/weth_32.png",
+			"cTokenDecimals": 8,
+			"underlyingDecimals": 18,
+			"address": "0x39cC0fbA5be15F0263c86E0ec164a2be43C0eB4B",
+			"underlyingAddress": "0x7624cbE2f83c47Fd6DE8804cD76501845062803F"
 		}
 	}
 }
@@ -76,6 +109,39 @@ var _GOERLI_ENV = {
 			"underlyingDecimals": 18,
 			"address": "0x8e82Fe91Ebc61842ABB6c5cfe324e04f5E396335",
 			"underlyingAddress": "0x56C0369E002852C2570ca0CC3442E26df98E01A2"
+		},
+		"usdt": {
+			"id": "usdt",
+			"name": "USDT",
+			"index": "tether",
+			"unit": "USDT",
+			"logo": "./assets/libs/cryptocurrency-icons/32/color/usdt.png",
+			"cTokenDecimals": 8,
+			"underlyingDecimals": 6,
+			"address": "0x49FE03B293B8f8806A1f98c8A8535778eFb1A247",
+			"underlyingAddress": "0x1Ad746307FC56B1eB8627FA2C088Ae320CF13224"
+		},
+		"wbtc": {
+			"id": "wbtc",
+			"name": "WBTC",
+			"index": "wbtc",
+			"unit": "WBTC",
+			"logo": "./assets/images/tokens/wbtc_32.png",
+			"cTokenDecimals": 8,
+			"underlyingDecimals": 8,
+			"address": "0x651F15B02115CCB9f11686600075489C83D36c00",
+			"underlyingAddress": "0xdA4a47eDf8ab3c5EeeB537A97c5B66eA42F49CdA"
+		},
+		"weth": {
+			"id": "weth",
+			"name": "WETH",
+			"index": "weth",
+			"unit": "WETH",
+			"logo": "./assets/images/tokens/weth_32.png",
+			"cTokenDecimals": 8,
+			"underlyingDecimals": 18,
+			"address": "0x39cC0fbA5be15F0263c86E0ec164a2be43C0eB4B",
+			"underlyingAddress": "0x7624cbE2f83c47Fd6DE8804cD76501845062803F"
 		}
 	}
 }
