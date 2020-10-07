@@ -4,6 +4,7 @@ fetch("./header.html")
   })
   .then(data => {
     document.querySelector("header").innerHTML = data;
+    if(hideMetamask) $('.metamask-container').remove();
   });
 
 fetch("./footer.html")
