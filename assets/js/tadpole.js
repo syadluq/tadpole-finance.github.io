@@ -22,28 +22,6 @@ var _MAINNET_ENV = {
 	"genesisMiningAddress": "0xC5dB56078aB1857A0D42A9D70C8a9282d4dB858b",
 	"etherscan": "https://etherscan.io/",
 	"cTokens": {
-		"idk": {
-			"id": "idk",
-			"name": "IDK",
-			"index": "idk",
-			"unit": "IDK",
-			"logo": "./assets/images/tokens/idk_32.png",
-			"cTokenDecimals": 8,
-			"underlyingDecimals": 8,
-			"address": "0x603ea7d47e461998e794FC60bA1062E420dfB76e",
-			"underlyingAddress": "0xf32789C480Cd5944AE1539c83e33380439b14bb3"
-		},
-		"ten": {
-			"id": "ten",
-			"name": "TEN",
-			"index": "tokenomy",
-			"unit": "TEN",
-			"logo": "./assets/libs/cryptocurrency-icons/32/color/ten.png",
-			"cTokenDecimals": 8,
-			"underlyingDecimals": 18,
-			"address": "0x8e82Fe91Ebc61842ABB6c5cfe324e04f5E396335",
-			"underlyingAddress": "0x56C0369E002852C2570ca0CC3442E26df98E01A2"
-		},
 		"usdt": {
 			"id": "usdt",
 			"name": "USDT",
@@ -76,6 +54,28 @@ var _MAINNET_ENV = {
 			"underlyingDecimals": 18,
 			"address": "0x39cC0fbA5be15F0263c86E0ec164a2be43C0eB4B",
 			"underlyingAddress": "0x7624cbE2f83c47Fd6DE8804cD76501845062803F"
+		},
+		"idk": {
+			"id": "idk",
+			"name": "IDK",
+			"index": "idk",
+			"unit": "IDK",
+			"logo": "./assets/images/tokens/idk_32.png",
+			"cTokenDecimals": 8,
+			"underlyingDecimals": 8,
+			"address": "0x603ea7d47e461998e794FC60bA1062E420dfB76e",
+			"underlyingAddress": "0xf32789C480Cd5944AE1539c83e33380439b14bb3"
+		},
+		"ten": {
+			"id": "ten",
+			"name": "TEN",
+			"index": "tokenomy",
+			"unit": "TEN",
+			"logo": "./assets/images/tokens/ten_32.png",
+			"cTokenDecimals": 8,
+			"underlyingDecimals": 18,
+			"address": "0x8e82Fe91Ebc61842ABB6c5cfe324e04f5E396335",
+			"underlyingAddress": "0x56C0369E002852C2570ca0CC3442E26df98E01A2"
 		}
 	}
 }
@@ -88,28 +88,6 @@ var _GOERLI_ENV = {
 	"genesisMiningAddress": "0xC5dB56078aB1857A0D42A9D70C8a9282d4dB858b",
 	"etherscan": "https://goerli.etherscan.io/",
 	"cTokens": {
-		"idk": {
-			"id": "idk",
-			"name": "IDK",
-			"index": "idk",
-			"unit": "IDK",
-			"logo": "./assets/images/tokens/idk_32.png",
-			"cTokenDecimals": 8,
-			"underlyingDecimals": 8,
-			"address": "0x603ea7d47e461998e794FC60bA1062E420dfB76e",
-			"underlyingAddress": "0xf32789C480Cd5944AE1539c83e33380439b14bb3"
-		},
-		"ten": {
-			"id": "ten",
-			"name": "TEN",
-			"index": "tokenomy",
-			"unit": "TEN",
-			"logo": "./assets/libs/cryptocurrency-icons/32/color/ten.png",
-			"cTokenDecimals": 8,
-			"underlyingDecimals": 18,
-			"address": "0x8e82Fe91Ebc61842ABB6c5cfe324e04f5E396335",
-			"underlyingAddress": "0x56C0369E002852C2570ca0CC3442E26df98E01A2"
-		},
 		"usdt": {
 			"id": "usdt",
 			"name": "USDT",
@@ -142,6 +120,28 @@ var _GOERLI_ENV = {
 			"underlyingDecimals": 18,
 			"address": "0x39cC0fbA5be15F0263c86E0ec164a2be43C0eB4B",
 			"underlyingAddress": "0x7624cbE2f83c47Fd6DE8804cD76501845062803F"
+		},
+		"idk": {
+			"id": "idk",
+			"name": "IDK",
+			"index": "idk",
+			"unit": "IDK",
+			"logo": "./assets/images/tokens/idk_32.png",
+			"cTokenDecimals": 8,
+			"underlyingDecimals": 8,
+			"address": "0x603ea7d47e461998e794FC60bA1062E420dfB76e",
+			"underlyingAddress": "0xf32789C480Cd5944AE1539c83e33380439b14bb3"
+		},
+		"ten": {
+			"id": "ten",
+			"name": "TEN",
+			"index": "tokenomy",
+			"unit": "TEN",
+			"logo": "./assets/images/tokens/ten_32.png",
+			"cTokenDecimals": 8,
+			"underlyingDecimals": 18,
+			"address": "0x8e82Fe91Ebc61842ABB6c5cfe324e04f5E396335",
+			"underlyingAddress": "0x56C0369E002852C2570ca0CC3442E26df98E01A2"
 		}
 	}
 }
