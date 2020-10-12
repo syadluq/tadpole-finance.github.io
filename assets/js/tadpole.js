@@ -1,7 +1,5 @@
 var BN = web3.utils.BN;
 
-
-
 var accountBalance = new Object();
 var accountBorrow = new Object();
 var prices = new Object();	
@@ -16,10 +14,10 @@ var formatter = new Intl.NumberFormat('us-US', {
 
 var _MAINNET_ENV = {
 	"id": 1,
-	"comptrollerAddress": "0x505E1c2BFfe0Bf14b9f5521e4F4233FF977a2395",
-	"oracleAddress": "0x0f03a46E1c3393B5ef90BB6c297197274c71e7Bc",
-	"tadAddress": "0xDB4b0387Ca9b9eB2bf6654887adbE6125a2Fd19C",
-	"genesisMiningAddress": "0xC5dB56078aB1857A0D42A9D70C8a9282d4dB858b",
+	"comptrollerAddress": "0x",
+	"oracleAddress": "0x",
+	"tadAddress": "0x9f7229aF0c4b9740e207Ea283b9094983f78ba04",
+	"genesisMiningAddress": "0x",
 	"etherscan": "https://etherscan.io/",
 	"cTokens": {
 		"usdt": {
@@ -30,8 +28,8 @@ var _MAINNET_ENV = {
 			"logo": "./assets/libs/cryptocurrency-icons/32/color/usdt.png",
 			"cTokenDecimals": 8,
 			"underlyingDecimals": 6,
-			"address": "0x49FE03B293B8f8806A1f98c8A8535778eFb1A247",
-			"underlyingAddress": "0x1Ad746307FC56B1eB8627FA2C088Ae320CF13224"
+			"address": "0x",
+			"underlyingAddress": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 		},
 		"wbtc": {
 			"id": "wbtc",
@@ -41,8 +39,8 @@ var _MAINNET_ENV = {
 			"logo": "./assets/images/tokens/wbtc_32.png",
 			"cTokenDecimals": 8,
 			"underlyingDecimals": 8,
-			"address": "0x651F15B02115CCB9f11686600075489C83D36c00",
-			"underlyingAddress": "0xdA4a47eDf8ab3c5EeeB537A97c5B66eA42F49CdA"
+			"address": "0x",
+			"underlyingAddress": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
 		},
 		"weth": {
 			"id": "weth",
@@ -52,8 +50,8 @@ var _MAINNET_ENV = {
 			"logo": "./assets/images/tokens/weth_32.png",
 			"cTokenDecimals": 8,
 			"underlyingDecimals": 18,
-			"address": "0x39cC0fbA5be15F0263c86E0ec164a2be43C0eB4B",
-			"underlyingAddress": "0x7624cbE2f83c47Fd6DE8804cD76501845062803F"
+			"address": "0x",
+			"underlyingAddress": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
 		},
 		"idk": {
 			"id": "idk",
@@ -63,8 +61,8 @@ var _MAINNET_ENV = {
 			"logo": "./assets/images/tokens/idk_32.png",
 			"cTokenDecimals": 8,
 			"underlyingDecimals": 8,
-			"address": "0x603ea7d47e461998e794FC60bA1062E420dfB76e",
-			"underlyingAddress": "0xf32789C480Cd5944AE1539c83e33380439b14bb3"
+			"address": "0x",
+			"underlyingAddress": "0x61fd1c62551850D0c04C76FcE614cBCeD0094498"
 		},
 		"ten": {
 			"id": "ten",
@@ -74,8 +72,8 @@ var _MAINNET_ENV = {
 			"logo": "./assets/images/tokens/ten_32.png",
 			"cTokenDecimals": 8,
 			"underlyingDecimals": 18,
-			"address": "0x8e82Fe91Ebc61842ABB6c5cfe324e04f5E396335",
-			"underlyingAddress": "0x56C0369E002852C2570ca0CC3442E26df98E01A2"
+			"address": "0x",
+			"underlyingAddress": "0xDD16eC0F66E54d453e6756713E533355989040E4"
 		}
 	}
 }
@@ -158,7 +156,6 @@ change_environment = function(chainId){
 		$('.goerli-testnet').addClass('d-none');
 		$('.mainnet').removeClass('d-none');
 		
-		alert('Project is under development, currently only support the Goerli Testnet');
 	}
 	else if(chainId=='0x5'||chainId=='0x05'){
 		ENV = _GOERLI_ENV;
@@ -188,6 +185,8 @@ var syncCont = function(){
 	
 	if(page!='main') return;
 	
+	ENV = _GOERLI_ENV;
+	
 	ENV.comptrollerContract = new web3.eth.Contract(comptrollerAbi, ENV.comptrollerAddress);
 	ENV.oracleContract = new web3.eth.Contract(oracleAbi, ENV.oracleAddress);
 	Object.values(ENV.cTokens).forEach(async function(cToken, index){
@@ -208,6 +207,8 @@ async function asyncForEach(array, callback) {
 var syncRate = function(){
 	
 	if(page!='main') return;
+	
+	ENV = _GOERLI_ENV;
 	
 	Object.values(ENV.cTokens).forEach(async function(cToken, index){
 	
@@ -253,6 +254,8 @@ var getBalance = async function(cToken, address){
 var syncAccount = async function(address){
 	
 	if(page!='main') return;
+	
+	ENV = _GOERLI_ENV;
 			
 	if(!address){
 		Object.values(ENV.cTokens).forEach(function(cToken, cIndex){
@@ -1051,7 +1054,7 @@ var init_genesis = async function(){
 	var total_stake = await genesisCont.methods.totalStaked().call();
 	var miningStateBlock = await genesisCont.methods.miningStateBlock().call();
 	var startMiningBlockNum = await genesisCont.methods.startMiningBlockNum().call();
-	var totalGenesisBlockNum = 172800;
+	var totalGenesisBlockNum = 205000;
 	var genesisProgressPercent = ((miningStateBlock-startMiningBlockNum)/totalGenesisBlockNum*100).toFixed(2);
 	
 	$('.total-stake').html(web3.utils.fromWei(total_stake));
