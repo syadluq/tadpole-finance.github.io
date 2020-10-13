@@ -1105,7 +1105,8 @@ var prepare_stake = async function(){
 		return;
 	}
 	
-	if(stake_raw_amount>ten_balance){
+	if(stake_amount>web3.utils.fromWei(ten_balance)*1){
+		console.log(stake_amount, web3.utils.fromWei(ten_balance)*1);
 		Swal.fire(
 		  'Failed',
 		  'TEN balance not enough',
@@ -1117,7 +1118,7 @@ var prepare_stake = async function(){
 	var allowance = await tenCont.methods.allowance(account, ENV.genesisMiningAddress).call();
 	
 	
-	if(allowance<stake_raw_amount){ //allowance not enough, ask to approve
+	if(web3.utils.fromWei(allowance)*1<stake_amount){ //allowance not enough, ask to approve
 		
 	
 		$('.go-stake').append(' <span class="mdi mdi-loading mdi-spin"></span>').attr('onclick', '');
