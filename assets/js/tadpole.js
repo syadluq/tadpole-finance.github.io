@@ -1045,6 +1045,8 @@ var getClaimableTad = async function(address){
 	var deltaIndex = (new BN(miningState[0])).sub(new BN(stakerIndex));
 	var tadDelta = web3.utils.fromWei((new BN (deltaIndex)).mul(new BN(tenStake)));
 	
+	tadDelta = tadDelta.replace(/\.[0-9]+$/, ''); //remove decimals
+	
 	return tadDelta;
 	
 }
