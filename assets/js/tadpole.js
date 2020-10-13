@@ -17,7 +17,7 @@ var _MAINNET_ENV = {
 	"comptrollerAddress": "0x",
 	"oracleAddress": "0x",
 	"tadAddress": "0x9f7229aF0c4b9740e207Ea283b9094983f78ba04",
-	"genesisMiningAddress": "0x",
+	"genesisMiningAddress": "0x8Cb331D8F117a5C914fd0f2579321572A27bf191",
 	"etherscan": "https://etherscan.io/",
 	"cTokens": {
 		"usdt": {
