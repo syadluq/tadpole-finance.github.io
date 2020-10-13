@@ -1126,7 +1126,7 @@ var prepare_stake = async function(){
 	
 		$('.go-stake').append(' <span class="mdi mdi-loading mdi-spin"></span>').attr('onclick', '');
 		var uintmax = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
-		await tenCont.methods.approve(ENV.genesisMiningAddress, uintmax).send({from: account}, function(err, result){
+		await tenCont.methods.approve(ENV.genesisMiningAddress, uintmax).send({from: account, gas: gasLimitApprove}, function(err, result){
 			$('.go-stake .mdi-loading').remove();
 			if (err) {
 				$.magnificPopup.close();
