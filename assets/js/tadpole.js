@@ -6,6 +6,8 @@ var prices = new Object();
 var enableCollateral = new Object();	
 var assetsIn;
 var accountLiquidityAvailable;
+const gasLimitStake = 300000;
+const gasLimitApprove = 70000;
 
 var formatter = new Intl.NumberFormat('us-US', {
   style: 'currency',
@@ -667,7 +669,8 @@ var go_enable = async function(id){
 	var token = new web3.eth.Contract(erc20Abi, cont.underlyingAddress);
 	var raw_amount = 99999999999999999999*Math.pow(10, cont.underlyingDecimals);
 	var allowance = await token.methods.approve(cont.address, numberToString(raw_amount)).send({
-		from: account
+		from: account,
+		gas: gasLimitApprove
 	}, function(err, result){
 		if (err) {
 			$.magnificPopup.close();
@@ -1162,7 +1165,7 @@ var go_stake = async function(){
 	var stake_raw_amount = web3.utils.toWei(stake_amount);
 	
 	$('.go-stake').append(' <span class="mdi mdi-loading mdi-spin"></span>').attr('onclick', '');
-	await genesisCont.methods.stake(stake_raw_amount).send({from: account}, function(err, result){
+	await genesisCont.methods.stake(stake_raw_amount).send({from: account, gas: gasLimitStake}, function(err, result){
 		$('.go-stake .mdi-loading').remove();
 		if (err) {
 			$.magnificPopup.close();
