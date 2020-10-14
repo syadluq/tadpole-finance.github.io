@@ -74,7 +74,7 @@ ethereum.on('chainChanged', async (chainId) => {
 });
 
 $(function(){
-	if(ethereum!== 'undefined'){
+	if(typeof ethereum!== 'undefined'){
 		connectMetamask();
 	}
 });
