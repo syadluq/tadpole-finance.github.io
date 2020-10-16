@@ -1,0 +1,30 @@
+Sorry to write in Indonesian Language.
+
+Bug nya ada pada tadpole.finance genesis mining
+dimana user yang MENAMBAH stake TEN, TAD yang suda dikumpulkan otomatis masuk kedalam Wallet di Metamask.
+
+contoh: pertama kali dia stake TEN adalah 1000 TEN, dalam 2 Hari dia mempunyai 2 TAD
+kemudian, besoknya dia menambahkan 500 TEN lagi, namun TAD nya secara otomatis masuk ke wallet Metamask (yang terhubung dengan walletconnect tadpole.finance)
+
+padahal input data di blockchain untuk CLAIM TAD adalah=
+
+--
+Function: claimTad() ***
+
+MethodID: xxxxxxxxx
+--
+
+dan input data di blockchain untuk STAKE adalah=
+
+--
+Function: stake(uint256 countryID) ***
+
+MethodID: xxxxxxxxxx
+[0]:  0000000000000000000000000000000000000000000000xxxxxxxxxxxxxxxxxxxxx
+
+--
+
+tanpa adanya function Claim atau apapun yang berhubungan pada claiming TAD pada genesis mining
+
+memang, fee hanya jadi 1 saja (Stake kedua dan seterusnya membuat TAD ter-claim secara gratis, tidak harus bayar fee claim TAD)
+namun, hal ini cukup beresiko, dapat menyebabkan kerugian berupa pencurian token TEN maupun TAD
