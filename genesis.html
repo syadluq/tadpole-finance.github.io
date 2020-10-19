@@ -55,7 +55,7 @@
 	<script src="assets/js/metamask.js?32"></script>
 	<script src="assets/js/abi/GenesisMining.js"></script>
 	<script src="assets/js/abi/erc20.js"></script>
-	<script src="assets/js/tadpole.js?7"></script>
+	<script src="assets/js/tadpole.js?1"></script>
 	
 	<script type="text/javascript">
 		var page = 'genesis';
@@ -128,12 +128,12 @@
                     <div class="row coins_container">
 						
 
-                        <div class="col-xl-4 mb-5">
+                        <div class="col-lg-4 mb-5">
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Stake</h4>
 									<p class="card-title-desc">
-										Stake TEN to get the initial distribution of TAD. Total 200.000 TAD will be distributed in 30 days.
+										Stake TEN to get the initial distribution of TAD. Total 200.000 TAD will be distributed in 30 days. It will also claim the TAD reward to your wallet automatically (if any).
 									</p>
 									
 									<form>
@@ -148,6 +148,9 @@
 												</div>
 											</div>
 											<div class="form-group mb-0">
+												<div class="float-right mt-3 text-muted small">
+													<a href="#" onclick="addTenToMetamask(); return false;">add TEN to Metamask</a>
+												</div>
 												<div>
 													<button type="submit" class="btn btn-success waves-effect waves-light mr-1 go-stake" onclick="prepare_stake(); return false;">
 														Stake
@@ -166,12 +169,12 @@
 						</div>
 						
 
-                        <div class="col-xl-4 mb-5">
+                        <div class="col-lg-4 mb-5">
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Unstake</h4>
 									<p class="card-title-desc">
-										You may unstake your TEN token anytime during and after the Genesis Mining period.
+										You may unstake your TEN token anytime during and after the Genesis Mining period. It will also claim the TAD reward to your wallet automatically (if any).
 									</p>
 									
 									<form>
@@ -205,12 +208,12 @@
 						</div>
 						
 
-                        <div class="col-xl-4 mb-5">
+                        <div class="col-lg-4 mb-5">
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Claim</h4>
 									<p class="card-title-desc">
-										You need to manually claim to get TAD token into your wallet. Beware that you need to spend some ethereum gas.
+										You need to manually claim to get TAD token into your wallet. Beware that you need to spend some ethereum gas. You may claim your reward anytime, during or after the genesis period.
 									</p>
 									
 									<form>
@@ -225,6 +228,9 @@
 												</div>
 											</div>
 											<div class="form-group mb-0">
+												<div class="float-right mt-3 text-muted small">
+													<a href="#" onclick="addTadToMetamask(); return false;">add TAD to Metamask</a>
+												</div>
 												<div>
 													<button type="submit" class="btn btn-info waves-effect waves-light mr-1 go-claim" onclick="go_claim(); return false;">
 														Claim

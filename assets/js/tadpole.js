@@ -1263,6 +1263,58 @@ var go_claim = async function(){
 }
 
 
+var addTadToMetamask = async function(){
+	
+	if(!account){
+		Swal.fire(
+		  'Error',
+		  'Connect MetaMask to continue.',
+		  'error'
+		)
+		return;
+	}
+
+	await ethereum.request({
+	method: 'wallet_watchAsset',
+	params: {
+	  type: 'ERC20', // Initially only supports ERC20, but eventually more!
+	  options: {
+		address: ENV.tadAddress, // The address that the token is at.
+		symbol: 'TAD', // A ticker symbol or shorthand, up to 5 chars.
+		decimals: 18, // The number of decimals in the token
+		image: 'http://tadpole.finance/assets/images/tadpole-128x128.png', // A string url of the token logo
+	  },
+	},
+	});
+}
+
+
+var addTenToMetamask = async function(){
+	
+	if(!account){
+		Swal.fire(
+		  'Error',
+		  'Connect MetaMask to continue.',
+		  'error'
+		)
+		return;
+	}
+
+	await ethereum.request({
+	method: 'wallet_watchAsset',
+	params: {
+	  type: 'ERC20', // Initially only supports ERC20, but eventually more!
+	  options: {
+		address: ENV.cTokens.ten.underlyingAddress, // The address that the token is at.
+		symbol: 'TEN', // A ticker symbol or shorthand, up to 5 chars.
+		decimals: 18, // The number of decimals in the token
+		image: 'http://tadpole.finance/assets/images/tokens/ten_32.png', // A string url of the token logo
+	  },
+	},
+	});
+}
+
+
 
 
 var toMaxDecimal = function(num, max=8){
