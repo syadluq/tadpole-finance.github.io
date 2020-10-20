@@ -1057,15 +1057,25 @@ var init_genesis = async function(){
 	var genesisCont =  new web3.eth.Contract(genesisMiningAbi, ENV.genesisMiningAddress);
 	
 	var total_stake = await genesisCont.methods.totalStaked().call();
+	var total_ten_staked = web3.utils.fromWei(total_stake);
 	var miningStateBlock = await genesisCont.methods.miningStateBlock().call();
 	var startMiningBlockNum = await genesisCont.methods.startMiningBlockNum().call();
 	var totalGenesisBlockNum = 205000;
 	var genesisProgressPercent = ((miningStateBlock-startMiningBlockNum)/totalGenesisBlockNum*100).toFixed(2);
+	var tenTadPrices = await getTenTadPrices();
 	
 	$('.total-stake').html(web3.utils.fromWei(total_stake));
 	
 	var genesisPercentageString = genesisProgressPercent+"%";
 	$('.genesis-percentage').html(genesisPercentageString).css({width: genesisPercentageString}).attr('aria-valuenow', genesisProgressPercent).attr('aria-valuemin', genesisProgressPercent);
+	
+	$('.tenPrice').html(toMaxDecimal(tenTadPrices.TEN, 3));
+	$('.tadPrice').html(toMaxDecimal(tenTadPrices.TAD, 3));
+	
+	//{TAD price} x {genesis distribution} / ( {TEN STAKED} x {TEN price} ) x 12 x 100%
+	var apy = tenTadPrices.TAD*200000 / (total_ten_staked * tenTadPrices.TEN ) * 12 * 100;
+	
+	$('.apyGenesis').html(toMaxDecimal(apy, 2));
 	
 	if(account){
 		var tenBalance = await tenCont.methods.balanceOf(account).call();
@@ -1314,6 +1324,29 @@ var addTenToMetamask = async function(){
 	});
 }
 
+var getTenTadPrices = async function(){
+	let data = await fetch('https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2', {
+	  method: 'POST',
+	  headers: {
+		'Content-Type': 'application/json',
+		'Accept': 'application/json',
+	  },
+	  body: JSON.stringify({query: "{ \
+		  tokens(where: {id_in: [\"0x9f7229af0c4b9740e207ea283b9094983f78ba04\", \"0xdd16ec0f66e54d453e6756713e533355989040e4\"]}) {\
+			id derivedETH symbol\
+			}\
+		  bundle(id: \"1\"){ ethPrice }	  }"})
+	})
+	  .then(r => r.json())
+	  .then(data => {return data;});
+	  
+	  var ethPrice = data.data.bundle.ethPrice;
+	  var tadPrice = data.data.tokens[0].derivedETH * ethPrice;
+	  var tenPrice = data.data.tokens[1].derivedETH * ethPrice;
+	  
+	  return {TAD: tadPrice, TEN: tenPrice};
+}
+
 
 
 
@@ -1321,6 +1354,7 @@ var toMaxDecimal = function(num, max=8){
 	if(typeof num=='float') num = num.toString();
 	
 	if(!num) return '0';
+	num = num+"";
 	
 	var tmp = num.split('.');
 	
@@ -1331,7 +1365,7 @@ var toMaxDecimal = function(num, max=8){
 	var decNow = tmp[1].length;
 	
 	if(decNow>max){
-		num = tmp[0]+'.'+tmp[1].substring(0, 8);
+		num = tmp[0]+'.'+tmp[1].substring(0, max);
 	}
 	return num;
 }

@@ -55,7 +55,7 @@
 	<script src="assets/js/metamask.js?32"></script>
 	<script src="assets/js/abi/GenesisMining.js"></script>
 	<script src="assets/js/abi/erc20.js"></script>
-	<script src="assets/js/tadpole.js?1"></script>
+	<script src="assets/js/tadpole.js?2"></script>
 	
 	<script type="text/javascript">
 		var page = 'genesis';
@@ -125,7 +125,7 @@
 						</div>
 					</div>
                     
-                    <div class="row coins_container">
+                    <div class="row coins_container justify-content-md-center">
 						
 
                         <div class="col-lg-4 mb-5">
@@ -247,6 +247,33 @@
                             
                             
 						</div>
+						
+
+                        <div class="col-lg-4 mb-5">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Genesis Mining APY Calculator</h4>
+									<p>APY is the rate of return of an investment product annualized. The calculation below references the current APY calculated with the latest TEN and TAD prices at Uniswap. The calculation subjects to change from time to time.</p>
+									<p class="card-title-desc">
+										TAD price: $<span class="tadPrice">?</span><br />
+										TEN price: $<span class="tenPrice">?</span><br />
+										<br />
+										APY formula: {TAD price} x {genesis distribution} / ( {TEN STAKED} x {TEN price} ) x 12 x 100%<br />
+										<br />
+										APY = <span class="tadPrice">?</span> x 200000 / ( <span class="total-stake"></span> x <span class="tenPrice">?</span> ) x 12 x 100%<br />
+										<b>APY = <span class="apyGenesis">?</span>%</b>
+									</p>
+								</div>
+							</div>
+                            
+                            
+                            
+						</div>
+						
+						
+						
+						
+						
                     </div>
                     <!-- end row -->
                     
