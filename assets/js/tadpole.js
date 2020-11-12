@@ -20,6 +20,9 @@ var _MAINNET_ENV = {
 	"oracleAddress": "0x",
 	"tadAddress": "0x9f7229aF0c4b9740e207Ea283b9094983f78ba04",
 	"genesisMiningAddress": "0x8Cb331D8F117a5C914fd0f2579321572A27bf191",
+	"uniswapMiningAddress": "0x0c14e822E43796d955a30b6d974f62031dA845e3",
+	"lpAddress": "0x9D8D4550637e3fc86CB465734Ab33280e4838E08",
+	"uniswapAddress": "0x9D8D4550637e3fc86CB465734Ab33280e4838E08",
 	"etherscan": "https://etherscan.io/",
 	"cTokens": {
 		"usdt": {
@@ -86,6 +89,9 @@ var _GOERLI_ENV = {
 	"oracleAddress": "0x0f03a46E1c3393B5ef90BB6c297197274c71e7Bc",
 	"tadAddress": "0xDB4b0387Ca9b9eB2bf6654887adbE6125a2Fd19C",
 	"genesisMiningAddress": "0xC5dB56078aB1857A0D42A9D70C8a9282d4dB858b",
+	"uniswapMiningAddress": "0xA67Df1a07dB88Dcfd4d339Ba97a289B5690A78c3",
+	"lpAddress": "0x8f5702821cB454081AAfE1232b89957E19B89Cd7",
+	"uniswapAddress": "0x8f5702821cB454081AAfE1232b89957E19B89Cd7",
 	"etherscan": "https://goerli.etherscan.io/",
 	"cTokens": {
 		"usdt": {
@@ -175,6 +181,7 @@ change_environment = function(chainId){
 	
 	if(page=='main') syncCont();
 	else if(page=='genesis') init_genesis();
+	else if(page=='staking') init_staking();
 	
 	if(OLD_ENVID!=ENV.id){
 		setTimeout(refreshData, 50);
