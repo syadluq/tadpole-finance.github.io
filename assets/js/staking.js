@@ -159,6 +159,9 @@ var init_staking = async function(){
 	else{
 		$('.my-stake').html('-');
 		$('.tad-to-claim').html('-');
+		$('.val_lp_balance').html('-');
+		$('#no-active-stakes').removeClass('d-none');
+		$('#stakes-loading').addClass('d-none');
 	}
 	
 	
