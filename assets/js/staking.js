@@ -27,6 +27,7 @@ var init_staking = async function(){
 		$('#no-active-stakes, .staking-not-started').removeClass('d-none');
 		$('.my-stake').html('-');
 		$('.tad-to-claim').html('-');
+		$('.val_lp_balance').html('-');
 		return;
 	}
 	
