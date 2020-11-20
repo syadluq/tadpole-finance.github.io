@@ -1099,6 +1099,12 @@ var init_genesis = async function(){
 }
 
 var prepare_stake = async function(){
+	Swal.fire(
+	  'Error',
+	  'Genesis Mining period is already finished.',
+	  'error'
+	)
+	return;
 	
 	if(!account){
 		Swal.fire(
