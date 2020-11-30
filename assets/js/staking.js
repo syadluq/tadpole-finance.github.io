@@ -53,7 +53,9 @@ var init_staking = async function(){
 	
 	
 	var total_stake = web3.utils.fromWei(await stakingCont.methods.totalStaked().call());
-	$('.uniswap-total-stake').html(total_stake);
+	$('.uniswap-total-stake').html(toMaxDecimal(total_stake, 2));
+	var totalStakedPower = web3.utils.fromWei(await stakingCont.methods.totalStakedPower().call());
+	$('.totalStakedPower, .uniswap-totalStakedPower').html(toMaxDecimal(totalStakedPower, 2));
 	
 	
 	var ethTadPrices = await getEthTadPrices();
@@ -69,7 +71,6 @@ var init_staking = async function(){
 	$('.reserveTad').html(toMaxDecimal(reserveTad, 2));
 	
 	$('.lpSupply').html(toMaxDecimal(uniswapLpSupply, 2));
-	$('.stakedLp').html(toMaxDecimal(total_stake, 2));
 	
 	$('.ethPrice').html(toMaxDecimal(ethTadPrices.ETH, 3));
 	$('.tadPrice').html(toMaxDecimal(ethTadPrices.TAD, 3));
@@ -86,6 +87,8 @@ var init_staking = async function(){
 	if(account){
 		var lpBalance = await lpCont.methods.balanceOf(account).call();
 		var lpStake = await stakingCont.methods.stakeHolders(account).call();
+		var stakerPower = await stakingCont.methods.stakerPower(account).call();
+		
 		var claimableTad = await uniswap_getClaimableTad(account);
 		var stakeCount = await stakingCont.methods.stakeCount(account).call();
 		
@@ -162,6 +165,7 @@ var init_staking = async function(){
 				
 			$('#stakes-loading').addClass('d-none');
 			$('#stakes-box').removeClass('d-none');
+			$('#no-active-stakes').addClass('d-none');
 		}
 		else{
 			$('#stakes-loading').addClass('d-none');
@@ -170,6 +174,7 @@ var init_staking = async function(){
 	
 		$('.val_lp_balance').html(toMaxDecimal(web3.utils.fromWei(lpBalance)));
 		$('.my-stake, .val_lp_stake').html(web3.utils.fromWei(lpStake));
+		$('.stakerPower').html(toMaxDecimal(web3.utils.fromWei(stakerPower), 2));
 		$('.tad-to-claim').html(toMaxDecimal(web3.utils.fromWei(claimableTad)));
 		$('#val_tad_avail').val(toMaxDecimal(web3.utils.fromWei(claimableTad)));
 		
