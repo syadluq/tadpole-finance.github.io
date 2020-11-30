@@ -55,6 +55,7 @@
 	<script src="assets/js/metamask.js"></script>
 	<script src="assets/js/abi/UniswapMining.js"></script>
 	<script src="assets/js/abi/erc20.js"></script>
+	<script src="assets/js/abi/TadLp.js"></script>
 	<script src="assets/js/tadpole.js"></script>
 	<script src="assets/js/staking.js?1"></script>
 	
@@ -231,18 +232,25 @@
 						</div>
 						
 
-<!--
                         <div class="col-lg-4 mb-5">
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Staking APY Calculator</h4>
-									<p>APY is the rate of return of an investment product annualized. The calculation below references the current APY calculated with the latest TAD and ETH prices at Uniswap. The calculation subjects to change from time to time.</p>
+									<p>The APY calculation is calculated with the latest prices at Uniswap. It subjects to change from time to time.</p>
 									<p class="card-title-desc">
-										TAD price: $<span class="tadPrice">?</span><br />
+										TAD price: $<span class="tadPrice">?</span> - 
 										ETH price: $<span class="ethPrice">?</span><br />
 										<br />
-										APY formula: {TAD price} x {genesis distribution} / ( {TEN STAKED} x {TEN price} ) x 12 x 100%<br />
-										<b>APY = <span class="apyGenesis">?</span>%</b>
+										Formula: {TAD price} * {stake reward} / ( {ETH reserve} * {ETH price} + {TAD reserve} * {TAD price} } * {LP Supply} / {Staked LP} * multiplier<br />
+										<br />
+<!--
+										APY = <span class="tadPrice">?</span> * 200000 / ( <span class="reserveEth">?</span> *  <span class="ethPrice">?</span> + <span class="reserveTad">?</span> *  <span class="tadPrice">?</span> ) * <span class="lpSupply">?</span> / <span class="stakedLp">?</span> * 100%<br />
+-->
+										<b>APY (not locked) = <span class="apyStaking0">?</span>%</b><br />
+										<b>APY (locked 30 days) = <span class="apyStaking30">?</span>%</b><br />
+										<b>APY (locked 90 days) = <span class="apyStaking90">?</span>%</b><br />
+										<b>APY (locked 180 days) = <span class="apyStaking180">?</span>%</b><br />
+										<b>APY (locked 360 days) = <span class="apyStaking360">?</span>%</b>
 									</p>
 								</div>
 							</div>
@@ -250,7 +258,6 @@
                             
                             
 						</div>
--->
 						
 						
 						

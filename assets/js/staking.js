@@ -32,7 +32,7 @@ var init_staking = async function(){
 	}
 	
 	var tadCont =  new web3.eth.Contract(erc20Abi, ENV.tadAddress);
-	var lpCont =  new web3.eth.Contract(erc20Abi, ENV.lpAddress);
+	var lpCont =  new web3.eth.Contract(tadLpAbi, ENV.lpAddress);
 	var stakingCont =  new web3.eth.Contract(uniswapMiningAbi, ENV.uniswapMiningAddress);
 	//~ var wethCont =  new web3.eth.Contract(erc20Abi, ENV.cTokens.weth.address);
 	
@@ -52,18 +52,36 @@ var init_staking = async function(){
 	$('.progress').attr('title', stakingPercentageString);
 	
 	
-	//~ var ethTadPrices = await getTenTadPrices();
+	var total_stake = web3.utils.fromWei(await stakingCont.methods.totalStaked().call());
+	$('.uniswap-total-stake').html(total_stake);
 	
-	var total_stake = await stakingCont.methods.totalStaked().call();
-	$('.uniswap-total-stake').html(web3.utils.fromWei(total_stake));
 	
-	//~ $('.ethPrice').html(toMaxDecimal(ethTadPrices.ETH, 3));
-	//~ $('.tadPrice').html(toMaxDecimal(ethTadPrices.TAD, 3));
+	var ethTadPrices = await getEthTadPrices();
+	var uniswapLpSupply = web3.utils.fromWei(await lpCont.methods.totalSupply().call());
+	var reserves = await lpCont.methods.getReserves().call();
 	
-	//~ //{TAD price} x {staking distribution} / ( {TOTAL ETH STAKED} * {ETH price} + {TOTAL TAD STAKED} * {TAD price}} x 100%
-	//~ var apy = ethTadPrices.TAD*200000 / (total_eth_staked * ethTadPrices.ETH +  total_tad_staked * ethTadPrices.TAD) * 100;
+	var reserveTad = web3.utils.fromWei(reserves._reserve0);
+	var reserveEth = web3.utils.fromWei(reserves._reserve1);
 	
-	//~ $('.apyGenesis').html(toMaxDecimal(apy, 2));
+	console.log(uniswapLpSupply, reserveTad, reserveEth);
+	
+	$('.reserveEth').html(toMaxDecimal(reserveEth, 2));
+	$('.reserveTad').html(toMaxDecimal(reserveTad, 2));
+	
+	$('.lpSupply').html(toMaxDecimal(uniswapLpSupply, 2));
+	$('.stakedLp').html(toMaxDecimal(total_stake, 2));
+	
+	$('.ethPrice').html(toMaxDecimal(ethTadPrices.ETH, 3));
+	$('.tadPrice').html(toMaxDecimal(ethTadPrices.TAD, 3));
+	
+	//{TAD price} * {staking distribution} / ( {ETH reserve} * {ETH price} + {TAD reserve} * {TAD price} } * {LP Supply} / {Staked LP} * 100%
+	var apy = ethTadPrices.TAD*200000 / (reserveEth * ethTadPrices.ETH +  reserveTad * ethTadPrices.TAD) * uniswapLpSupply / total_stake * 100;
+	
+	$('.apyStaking0').html(toMaxDecimal(apy, 2));
+	$('.apyStaking30').html(toMaxDecimal(apy*2, 2));
+	$('.apyStaking90').html(toMaxDecimal(apy*3, 2));
+	$('.apyStaking180').html(toMaxDecimal(apy*4, 2));
+	$('.apyStaking360').html(toMaxDecimal(apy*5, 2));
 	
 	if(account){
 		var lpBalance = await lpCont.methods.balanceOf(account).call();
