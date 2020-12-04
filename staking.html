@@ -57,7 +57,7 @@
 	<script src="assets/js/abi/erc20.js"></script>
 	<script src="assets/js/abi/TadLp.js"></script>
 	<script src="assets/js/tadpole.js"></script>
-	<script src="assets/js/staking.js?3"></script>
+	<script src="assets/js/staking.js?5"></script>
 	
 	<script type="text/javascript">
 		var page = 'staking';
@@ -242,10 +242,10 @@
 									<h4 class="card-title">Staking APY Calculator</h4>
 									<p>The APY calculation is calculated with the latest prices at Uniswap. It subjects to change from time to time.</p>
 									<p class="card-title-desc">
-										TAD price: $<span class="tadPrice">?</span> - 
+										TAD price: $<span class="tadPrice">?</span> &nbsp;&middot;&nbsp;
 										ETH price: $<span class="ethPrice">?</span><br />
 										<br />
-										Formula: {TAD price} * {stake reward} / ( {ETH reserve} * {ETH price} + {TAD reserve} * {TAD price} } * {LP Supply} / {Staked LP} * multiplier<br />
+										Formula: <img src="assets/images/stake-apy-formula.png" height="30px" /><br />
 										<br />
 <!--
 										APY = <span class="tadPrice">?</span> * 200000 / ( <span class="reserveEth">?</span> *  <span class="ethPrice">?</span> + <span class="reserveTad">?</span> *  <span class="tadPrice">?</span> ) * <span class="lpSupply">?</span> / <span class="stakedLp">?</span> * 100%<br />

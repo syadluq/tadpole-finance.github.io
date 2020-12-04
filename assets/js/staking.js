@@ -78,11 +78,11 @@ var init_staking = async function(){
 	//{TAD price} * {staking distribution} / ( {ETH reserve} * {ETH price} + {TAD reserve} * {TAD price} } * {LP Supply} / {Staked LP} * 100%
 	var apy = ethTadPrices.TAD*200000 / (reserveEth * ethTadPrices.ETH +  reserveTad * ethTadPrices.TAD) * uniswapLpSupply / total_stake * 100;
 	
-	$('.apyStaking0').html(toMaxDecimal(apy, 2));
-	$('.apyStaking30').html(toMaxDecimal(apy*2, 2));
-	$('.apyStaking90').html(toMaxDecimal(apy*3, 2));
-	$('.apyStaking180').html(toMaxDecimal(apy*4, 2));
-	$('.apyStaking360').html(toMaxDecimal(apy*5, 2));
+	$('.apyStaking0').html(toMaxDecimal(apy*0.2, 2));
+	$('.apyStaking30').html(toMaxDecimal(apy*0.4, 2));
+	$('.apyStaking90').html(toMaxDecimal(apy*0.6, 2));
+	$('.apyStaking180').html(toMaxDecimal(apy*0.8, 2));
+	$('.apyStaking360').html(toMaxDecimal(apy, 2));
 	
 	if(account){
 		var lpBalance = await lpCont.methods.balanceOf(account).call();
